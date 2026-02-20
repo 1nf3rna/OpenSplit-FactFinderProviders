@@ -1,0 +1,18 @@
+Name: "Z3R"
+Platform: "SNES"
+ReadInterval: 8
+Watches:
+  - name: "triforce"
+    address: "0x8A"
+    type: "U8"
+    bank: "wram"
+
+  - name: "fileSelect"
+    address: "0x10"
+    type: "U8"
+    bank: "wram"
+
+  - name: "player1input"
+    address: "0xF0"
+    type: "U8"
+    bank: "wram"

@@ -1,0 +1,58 @@
+Name: "Home Improvement: Power Tool Pursuit"
+Platform: "SNES"
+ReadInterval: 17
+Watches:
+  - name: "stage"
+    address: "0xAE1"
+    type: "U8"
+    bank: "wram"
+
+  - name: "substage"
+    address: "0xAE3"
+    type: "U8"
+    bank: "wram"
+
+  - name: "play_state"
+    address: "0x3B1"
+    type: "U8"
+    bank: "wram"
+
+  - name: "scene2"
+    address: "0x886"
+    type: "U8"
+    bank: "wram"
+
+  - name: "scene"
+    address: "0x161F"
+    type: "U8"
+    bank: "wram"
+
+  - name: "gameplay"
+    address: "0xAE5"
+    type: "U8"
+    bank: "wram"
+
+  - name: "state"
+    address: "0x1400"
+    type: "U8"
+    bank: "wram"
+
+  - name: "crates"
+    address: "0x1A8A"
+    type: "U8"
+    bank: "wram"
+
+  - name: "BossHP"
+    address: "0x1491"
+    type: "U8"
+    bank: "wram"
+  
+  - name: "W2P1HP"
+    address: "0x1493"
+    type: "U8"
+    bank: "wram"
+
+  - name: "FBossHP"
+    address: "0x149D"
+    type: "U8"
+    bank: "wram"  

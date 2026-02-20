@@ -1,0 +1,18 @@
+Name: "Battletoads - Any% Co-op"
+Platform: "NES"
+ReadInterval: 8
+Watches:
+  - name: "level"
+    address: "0x10"
+    type: "U8"
+    bank: "RAM"
+
+  - name: "qdead"
+    address: "0x5"
+    type: "U8"
+    bank: "RAM"
+
+  - name: "player2"
+    address: "0x12"
+    type: "U8"
+    bank: "RAM"

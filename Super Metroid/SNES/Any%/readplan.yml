@@ -1,0 +1,78 @@
+Name: "Super Metroid - Any%"
+Platform: "SNES"
+ReadInterval: 8
+Watches:
+  - name: "gameState"
+    address: "0x998"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "roomID"
+    address: "0x79B"
+    type: "U16"
+    bank: "WRAM"
+
+  - name: "unlockedEquipment1"
+    address: "0x9A5"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "unlockedEquipment2"
+    address: "0x9A4"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "unlockedBeams"
+    address: "0x9A8"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "unlockedCharge"
+    address: "0x9A9"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "eventFlags"
+    address: "0x821"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "maxPowerBombs"
+    address: "0x9D0"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "norfairBosses"
+    address: "0xD82A"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "brinstarBosses"
+    address: "0xD829"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "tourianBosses"
+    address: "0xD82D"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "maridiaBosses"
+    address: "0xD82C"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "wreckedShipBosses"
+    address: "0xD82B"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "motherBrainHP"
+    address: "0xFCC"
+    type: "U16"
+    bank: "WRAM"
+
+  - name: "ShipAI"
+    address: "0xFB2"
+    type: "U16"
+    bank: "WRAM"

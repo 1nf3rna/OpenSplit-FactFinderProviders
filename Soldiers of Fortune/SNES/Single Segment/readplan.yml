@@ -1,0 +1,53 @@
+Name: "Soldiers of Fortune"
+Platform: "SNES"
+ReadInterval: 8
+Watches:
+  - name: "level"
+    address: "0x6E0"
+    type: "U8"
+    bank: "wram"
+
+  - name: "world"
+    address: "0x6E2"
+    type: "U8"
+    bank: "wram"
+
+  - name: "player1input"
+    address: "0x4D"
+    type: "U8"
+    bank: "wram"
+
+  - name: "player2input"
+    address: "0x4F"
+    type: "U8"
+    bank: "wram"
+
+  - name: "bossHP"
+    address: "0x3841"
+    type: "U8"
+    bank: "wram"
+
+  - name: "exitCount"
+    address: "0x89D"
+    type: "U8"
+    bank: "wram"
+
+  - name: "levelComplete"
+    address: "0x9E"
+    type: "U8"
+    bank: "wram"
+
+  - name: "scoreScreen"
+    address: "0x51"
+    type: "U8"
+    bank: "wram"
+
+  - name: "shopPlayerID"
+    address: "0x0C"
+    type: "U8"
+    bank: "wram"
+
+  - name: "shopScreen"
+    address: "0x5E"
+    type: "U8"
+    bank: "wram"
