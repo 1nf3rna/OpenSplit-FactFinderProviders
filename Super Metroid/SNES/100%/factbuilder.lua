@@ -1,0 +1,868 @@
+function onTick()
+    checkStart()
+    checkReset()
+    checkStage()
+end
+
+function checkStage()
+    -- Room Only Checks
+    -- Ceres Ridley, metroid 1, metroid 2, metroid 3, metroid 4, baby
+    if (roomID == 0xE0B5 and roomID_last == 0xE06B)
+    or (roomID == 0xDB31 and roomID_last == 0xDAE1)
+    or (roomID == 0xDB7D and roomID_last == 0xDB31)
+    or (roomID == 0xDBCD and roomID_last == 0xDB7D)
+    or (roomID == 0xDC19 and roomID_last == 0xDBCD)
+    or (roomID == 0xDCFF and roomID_last == 0xDCB1) then
+        split()
+        return
+    end
+    -- Boss Kill Checks
+    -- Ceres Ridley, Bomb Torizo, Kraid, crocomire, Phantoon, Botwoon, Draygon, goldenTorizo, Ridley, Mother Brain 3
+    if (ceresBosses != ceresBosses_last)
+    or (crateriaBosses != crateriaBosses_last)
+    or (brinstarBosses != brinstarBosses_last)
+    or (norfairBosses != norfairBosses_last)
+    or (wreckedShipBosses != wreckedShipBosses_last)
+    or (maridiaBosses != maridiaBosses_last)
+    or (tourianBosses != tourianBosses_last) then
+        split()
+        return
+    end
+    -- State Checks
+    -- Escaped Ceres Station, tube broken, mother brain p1, mother brain p2, final escape
+    if (roomID == 0xDF45 and gameState == 0x20 and gameState_last == 0x8)
+    or (roomID == 0xCEFB and eventFlags != eventFlags_last)
+    or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x4650 and motherBrainHP_last == 0)
+    or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x8CA0 and motherBrainHP_last == 0)
+    or (shipAI == 0xAA4F and shipAI_last != 0xAA4F and (eventFlags & 0x40) > 0) then
+        split()
+        return
+    end
+    -- Equipment Unlocks
+    -- Morph, varia, gravity, bombs, hjb, speed booster, space jump, grapple, xray, springball, screw attack,
+    -- spazer, wave, plasma, ice, charge, 
+    -- Supers, Missiles, Power Bombs, etanks, reserve
+    if (unlockedEquipment1 != unlockedEquipment1_last)
+    or (unlockedEquipment2 != unlockedEquipment2_last)
+    or (unlockedBeams != unlockedBeams_last)
+    or (unlockedCharge != unlockedCharge_last)
+    or (crateriaItems != crateriaItems_last)
+    or (brinteriaItems != brinteriaItems_last)
+    or (brinstarItems2 != brinstarItems2_last)
+    or (brinstarItems3 != brinstarItems3_last)
+    or (brinstarItems4 != brinstarItems4_last)
+    or (brinstarItems5 != brinstarItems5_last)
+    or (norfairItems1 != norfairItems1_last)
+    or (norfairItems2 != norfairItems2_last)
+    or (norfairItems3 != norfairItems3_last)
+    or (norfairItems4 != norfairItems4_last)
+    or (norfairItems5 != norfairItems5_last)
+    or (wreckedShipItems != wreckedShipItems_last)
+    or (maridiaItems1 != maridiaItems1_last)
+    or (maridiaItems2 != maridiaItems2_last)
+    or (maridiaItems3 != maridiaItems3_last) then
+        split()
+        return
+    end
+    -- -- Ceres Ridley Room
+    -- if roomID == 0xE0B5
+    -- and roomID_last == 0xE06B then
+    --     split()
+    --     return
+    -- end
+    -- -- Ceres Ridley
+    -- if roomID == 0xE0B5
+    -- and (ceresBosses & 0x1) > 0
+    -- and (ceresBosses_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Escaped Ceres Station
+    -- if roomID == 0xDF45
+    -- and gameState == 0x20
+    -- and gameState_last == 0x8 then
+    --     split()
+    --     return
+    -- end
+    -- -- Morph Aquired
+    -- if roomID == 0x9E9F
+    -- and (unlockedEquipment2 & 0x4) > 0
+    -- and (unlockedEquipment2_last & 0x4) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- Early Super Bridge Missile
+    -- if roomID == 0x9BC8
+    -- and brinteriaItems == (brinteriaItems_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- Bombs Aquired
+    -- if roomID == 0x9804
+    -- and (unlockedEquipment1 & 0x10) > 0
+    -- and (unlockedEquipment1_last & 0x10) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Bomb Torizo
+    -- if roomID == 0x9804
+    -- and (crateriaBosses & 0x4) > 0
+    -- and (crateriaBosses_last & 0x4) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- Terminator Tank
+    -- if roomID == 0x990D
+    -- and brinteriaItems == (brinteriaItems_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- Early Supers
+    -- if roomID == 0x9BC8
+    -- and brinstarItems2 == (brinstarItems2_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- Green Brinstar Reserve Missiles
+    -- if roomID == 0x9C07
+    -- and brinstarItems2 == (brinstarItems2_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- Green Brinstar Extra Reserve Missiles
+    -- if roomID == 0x9C07
+    -- and brinstarItems2 == (brinstarItems2_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- Brinstar Reserve
+    -- if roomID == 0x9C07
+    -- and brinstarItems2 == (brinstarItems2_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Red Brinstar Missiles
+    -- if roomID == 0xA3AE
+    -- and brinstarItems5 == (brinstarItems5_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Charge Beam Aquired
+    -- if roomID == 0x9D19
+    -- and (unlockedCharge & 0x10) > 0
+    -- and (unlockedCharge_last & 0x10) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Spazer Aquired
+    -- if roomID == 0xA447
+    -- and (unlockedBeams & 0x4) > 0
+    -- and (unlockedBeams_last & 0x4) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Kraid
+    -- if roomID == 0xA59F
+    -- and (brinstarBosses & 0x1) > 0
+    -- and (brinstarBosses_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Varia Suit Aquired
+    -- if roomID == 0xA6E2
+    -- and (unlockedEquipment2 & 0x1) > 0
+    -- and (unlockedEquipment2_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Kraid E Tank
+    -- if roomID == 0xA4B1
+    -- and brinstarItems5 == (brinstarItems5_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- High Jump Boots Tank
+    -- if roomID == 0xAA41
+    -- and norfairItems2 == (norfairItems2_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- High Jump Boots
+    -- if roomID == 0xA9E5
+    -- and (unlockedEquipment1 & 0x1) > 0
+    -- and (unlockedEquipment1_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- hiJumpMissiles
+    -- if roomID == 0xAA41
+    -- and norfairItems1 == (norfairItems1_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- cathedralMissiles
+    -- if roomID == 0xA788
+    -- and norfairItems1 == (norfairItems1_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- speedBoostMissiles
+    -- if roomID == 0xACF0
+    -- and norfairItems3 == (norfairItems3_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Speed Booster Aquired
+    -- if roomID == 0xAD1B
+    -- and (unlockedEquipment1 & 0x20) > 0
+    -- and (unlockedEquipment1_last & 0x20) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Wave Missile
+    -- if roomID == 0xADAD
+    -- and norfairItems3 == (norfairItems3_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- Wave Beam Aquired
+    -- if roomID == 0xADDE
+    -- and (unlockedBeams & 0x1) > 0
+    -- and (unlockedBeams_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- crocomireETank
+    -- if roomID == 0xA98D
+    -- and norfairItems1 == (norfairItems1_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- crocomire
+    -- if roomID == 0xA98D
+    -- and (norfairBosses & 0x2) > 0
+    -- and (norfairBosses_last & 0x2) == 0
+    --     split()
+    --     return
+    -- end
+    -- -- crocomireBombs
+    -- if roomID == 0xAADE
+    -- and norfairItems2 == (norfairItems2_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- grapple
+    -- if roomID == 0xAC2B
+    -- and (unlockedEquipment1 & 0x40) > 0
+    -- and (unlockedEquipment1_last & 0x40) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- grappleMissiles
+    -- if roomID == 0xAB8F
+    -- and norfairItems2 == (norfairItems2_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- postCrocomireMissiles
+    -- if roomID == 0xAB3B
+    -- and norfairItems2 == (norfairItems2_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- crocomireEscapeMissiles
+    -- if roomID == 0xAA0E
+    -- and norfairItems1 == (norfairItems1_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- alphaMissiles
+    -- if roomID == 0xA107
+    -- and brinstarItems4 == (brinstarItems4_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- Alpha Power Bombs Aquired
+    -- if roomID == 0xA3AE
+    -- and brinstarItems5 == (brinstarItems5_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- betaBombs
+    -- if roomID == 0xA37C
+    -- and brinstarItems4 == (brinstarItems4_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- moatMissiles
+    -- if roomID == 0x95FF
+    -- and crateriaItems == (crateriaItems_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- oceanBottomMissiles
+    -- if roomID == 0x93FE
+    -- and crateriaItems == (crateriaItems_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Phantoon
+    -- if roomID == 0xCD13
+    -- and (wreckedShipBosses & 0x1) > 0
+    -- and (wreckedShipBosses_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- wreckedShipRightSupers
+    -- if roomID == 0xCDF1
+    -- and wreckedShipItems == (wreckedShipItems_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- Left Supers
+    -- if roomID == 0xCDA8
+    -- and wreckedShipItems == (wreckedShipItems_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- wreckedShipETank
+    -- if roomID == 0xCC27
+    -- and wreckedShipItems == (wreckedShipItems_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- atticMissiles
+    -- if roomID == 0xCAAE
+    -- and wreckedShipItems == (wreckedShipItems_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- oceanTopMissiles
+    -- if roomID == 0x93FE
+    -- and crateriaItems == (crateriaItems_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- oceanMiddleMissiles
+    -- if roomID == 0x93FE
+    -- and crateriaItems == (crateriaItems_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- bowlingMissiles
+    -- if roomID == 0xC98E
+    -- and wreckedShipItems == (wreckedShipItems_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- wreckedShipReserve
+    -- if roomID == 0xC98E
+    -- and wreckedShipItems == (wreckedShipItems_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Gravity Suit Aquired
+    -- if roomID == 0xCE40
+    -- and (unlockedEquipment2 & 0x20) > 0
+    -- and (unlockedEquipment2_last & 0x20) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- wreckedShipMainShaftMissiles
+    -- if roomID == 0xCAF6
+    -- and wreckedShipItems == (wreckedShipItems_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- landingSiteBombs
+    -- if roomID == 0x93AA
+    -- and crateriaItems == (crateriaItems_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- gauntletETank
+    -- if roomID == 0x965B
+    -- and crateriaItems == (crateriaItems_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- gauntletRightMissiles
+    -- if roomID == 0x99BD
+    -- and brinteriaItems == (brinteriaItems_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- gauntletLeftMissiles
+    -- if roomID == 0x99BD
+    -- and brinteriaItems == (brinteriaItems_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- etecoonsETank
+    -- if roomID == 0xA011
+    -- and brinstarItems3 == (brinstarItems3_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- etecoonSupers
+    -- if roomID == 0xA051
+    -- and brinstarItems3 == (brinstarItems3_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- etecoonBombs
+    -- if roomID == 0x9AD9
+    -- and brinteriaItems == (brinteriaItems_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- bigPinkTopMissiles
+    -- if roomID == 0x9D19
+    -- and brinstarItems2 == (brinstarItems2_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- pinkBrinstarBombs
+    -- if roomID == 0x9E11
+    -- and brinstarItems3 == (brinstarItems3_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- waveGateETank
+    -- if roomID == 0xA15B
+    -- and brinstarItems4 == (brinstarItems4_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- sporeSpawnSupers
+    -- if roomID == 0x9B5B
+    -- and brinteriaItems == (brinteriaItems_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- Charge Missile
+    -- if roomID == 0x9D19
+    -- and brinstarItems2 == (brinstarItems2_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- tatoriETank
+    -- if roomID == 0xD055
+    -- and maridiaItems1 == (maridiaItems1_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- greenHillsMissiles
+    -- if roomID == 0x9E52
+    -- and brinstarItems3 == (brinstarItems3_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- Tunnel Broken
+    -- if roomID == 0xCEFB
+    -- and (eventFlags & 0x8) > 0
+    -- and (eventFlags_last & 0x8) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- mainStreetMissiles
+    -- if roomID == 0xCFC9
+    -- and maridiaItems1 == (maridiaItems1_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- waterwayETank
+    -- if roomID == 0xA0D2
+    -- and brinstarItems4 == (brinstarItems4_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- mamaTurtleMissiles
+    -- if roomID == 0xD055
+    -- and maridiaItems1 == (maridiaItems1_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- crabSupers
+    -- if roomID == 0xCFC9
+    -- and maridiaItems1 == (maridiaItems1_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- beachMissiles
+    -- if roomID == 0xD1DD
+    -- and maridiaItems1 == (maridiaItems1_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- wateringHoleSupers
+    -- if roomID == 0xD13B
+    -- and maridiaItems1 == (maridiaItems1_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- wateringHoleMissiles
+    -- if roomID == 0xD13B
+    -- and maridiaItems1 == (maridiaItems1_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- Botwoon
+    -- if roomID == 0xD95E
+    -- and (maridiaBosses & 0x2) > 0
+    -- and (maridiaBosses_last & 0x2) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Botwoon Tank
+    -- if roomID == 0xD7E4
+    -- and maridiaItems3 == (maridiaItems3_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- preDraygonMissiles
+    -- if roomID == 0xD78F
+    -- and maridiaItems2 == (maridiaItems2_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- Draygon
+    -- if roomID == 0xDA60
+    -- and (maridiaBosses & 0x1) > 0
+    -- and (maridiaBosses_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Space Jump Aquired
+    -- if roomID == 0xD9AA
+    -- and (unlockedEquipment1 & 0x2) > 0
+    -- and (unlockedEquipment1_last & 0x2) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- rightSandPitMissiles
+    -- if roomID == 0xD51E
+    -- and maridiaItems2 == (maridiaItems2_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- rightSandPitBombs
+    -- if roomID == 0xD51E
+    -- and maridiaItems2 == (maridiaItems2_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- springBall
+    -- if roomID == 0xD6D0
+    -- and (unlockedEquipment2 & 0x2) > 0
+    -- and (unlockedEquipment2_last & 0x2) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Plasma Aquired
+    -- if roomID == 0xD2AA
+    -- and (unlockedBeams & 0x8) > 0
+    -- and (unlockedBeams_last & 0x8) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- aqueductMissiles
+    -- if roomID == 0xD5A7
+    -- and maridiaItems2 == (maridiaItems2_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- aqueductSupers
+    -- if roomID == 0xD5A7
+    -- and maridiaItems2 == (maridiaItems2_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- maridiaReserve
+    -- if roomID == 0xD4EF
+    -- and maridiaItems2 == (maridiaItems2_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- leftSandPitMissiles
+    -- if roomID == 0xD4EF
+    -- and maridiaItems2 == (maridiaItems2_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- warehouseMissiles
+    -- if roomID == 0xA4DA
+    -- and brinstarItems5 == (brinstarItems5_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- Ice Beam Aquired
+    -- if roomID == 0xA890
+    -- and (unlockedBeams & 0x2) > 0
+    -- and (unlockedBeams_last & 0x2) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- crumbleShaftMissiles
+    -- if roomID == 0xA8F8
+    -- and norfairItems1 == (norfairItems1_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- goldTorizoMissiles
+    -- if roomID == 0xB283
+    -- and norfairItems3 == (norfairItems3_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- goldTorizoSupers
+    -- if roomID == 0xB283
+    -- and norfairItems3 == (norfairItems3_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- goldenTorizo
+    -- if roomID == 0xB283
+    -- and (norfairBosses & 0x4) > 0
+    -- and (norfairBosses_last & 0x4) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- screwAttack
+    -- if roomID == 0xB6C1
+    -- and (unlockedEquipment2 & 0x8) > 0
+    -- and (unlockedEquipment2_last & 0x8) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- mickeyMouseMissiles
+    -- if roomID == 0xB40A
+    -- and norfairItems4 == (norfairItems4_last + 2) then
+    --     split()
+    --     return
+    -- end
+    -- -- shameBombs
+    -- if roomID == 0xB5D5
+    -- and norfairItems4 == (norfairItems4_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- Entering Norfair
+    -- if roomID == 0xA7DE
+    -- and roomID_last == 0xA6A1 then
+    --     split()
+    --     return
+    -- end
+    -- -- Ridley Dead
+    -- if roomID == 0xB32E
+    -- and (norfairBosses & 0x1) > 0
+    -- and (norfairBosses_last & 0x1) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- ridleyETank
+    -- if roomID == 0xB698
+    -- and norfairItems4 == (norfairItems4_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- firefleaETank
+    -- if roomID == 0xB6EE
+    -- and norfairItems5 == (norfairItems5_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- greenBubblesMissiles
+    -- if roomID == 0xAC83
+    -- and norfairItems2 == (norfairItems2_last + 128) then
+    --     split()
+    --     return
+    -- end
+    -- -- lowerNorfairEscapeBombs
+    -- if roomID == 0xB55A
+    -- and norfairItems4 == (norfairItems4_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- lowerNorfairSpringMazeMissiles
+    -- if roomID == 0xB510
+    -- and norfairItems4 == (norfairItems4_last + 4) then
+    --     split()
+    --     return
+    -- end
+    -- -- threeMusketeersMissiles
+    -- if roomID == 0xB656
+    -- and norfairItems4 == (norfairItems4_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- norfairReserveMissiles
+    -- if roomID == 0xAC5A
+    -- and norfairItems2 == (norfairItems2_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- norfairReserve
+    -- if roomID == 0xAC5A
+    -- and norfairItems2 == (norfairItems2_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- bubbleMountainMissiles
+    -- if roomID == 0xACB3
+    -- and norfairItems3 == (norfairItems3_last + 1) then
+    --     split()
+    --     return
+    -- end
+    -- -- xray
+    -- if roomID == 0xA2CE
+    -- and (unlockedEquipment1 & 0x80) > 0
+    -- and (unlockedEquipment1_last & 0x80) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- blueBrinstarBombs
+    -- if roomID == 0x9E9F
+    -- and brinstarItems3 == (brinstarItems3_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- ceilingETank
+    -- if roomID == 0x9F64
+    -- and brinstarItems3 == (brinstarItems3_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- billyMaysMissiles
+    -- if roomID == 0xA1D8
+    -- and brinstarItems4 == (brinstarItems4_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- butWaitTheresMoreMissiles
+    -- if roomID == 0xA1D8
+    -- and brinstarItems4 == (brinstarItems4_last + 32) then
+    --     split()
+    --     return
+    -- end
+    -- -- blueBrinstarETankMissiles
+    -- if roomID == 0x9F64
+    -- and brinstarItems3 == (brinstarItems3_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- oldTourianMissiles
+    -- if roomID == 0x975C
+    -- and crateriaItems == (crateriaItems_last + 64) then
+    --     split()
+    --     return
+    -- end
+    -- -- climbSupers
+    -- if roomID == 0x99F9
+    -- and brinteriaItems == (brinteriaItems_last + 8) then
+    --     split()
+    --     return
+    -- end
+    -- -- dentalPlan
+    -- if roomID == 0x9A90
+    -- and brinteriaItems == (brinteriaItems_last + 16) then
+    --     split()
+    --     return
+    -- end
+    -- -- Golden 4
+    -- if roomID == 0xA66A
+    -- and roomID_last == 0xA5ED
+    -- and (norfairBosses & 0x1) > 0
+    -- and (brinstarBosses & 0x1) > 0
+    -- and (maridiaBosses & 0x1) > 0
+    -- and (wreckedShipBosses & 0x1) > 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- metroid 1
+    --     if roomID == 0xDB31
+    -- and roomID_last == 0xDAE1 then
+    --     split()
+    --     return
+    -- end
+    -- -- metroid 2
+    --     if roomID == 0xDB7D
+    -- and roomID_last == 0xDB31 then
+    --     split()
+    --     return
+    -- end
+    -- -- metroid 3
+    --     if roomID == 0xDBCD
+    -- and roomID_last == 0xDB7D then
+    --     split()
+    --     return
+    -- end
+    -- -- metroid 4
+    -- if roomID == 0xDC19
+    -- and roomID_last == 0xDBCD then
+    --     split()
+    --     return
+    -- end
+    -- -- baby
+    -- if roomID == 0xDCFF
+    -- and roomID_last == 0xDCB1 then
+    --     split()
+    --     return
+    -- end
+    -- -- Mother Brain 1
+    -- if roomID == 0xDD58
+    -- and gameState == 0x8
+    -- and motherBrainHP == 0x4650
+    -- and motherBrainHP_last == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Mother Brain 2
+    -- if roomID == 0xDD58
+    -- and gameState == 0x8
+    -- and motherBrainHP == 0x8CA0
+    -- and motherBrainHP_last == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Mother Brain 3
+    -- if roomID == 0xDD58
+    -- and (tourianBosses & 0x2) > 0
+    -- and (tourianBosses_last & 0x2) == 0 then
+    --     split()
+    --     return
+    -- end
+    -- -- Final Escape
+    -- if shipAI == 0xAA4F
+    -- and shipAI_last != 0xAA4F
+    -- and (eventFlags & 0x40) > 0 then
+    --     split()
+    --     return
+    -- end
+end
+
+function checkStart()
+    -- normal start
+    if gameState == 0x1F
+    and gameState_last == 0x2 then
+        split()
+    end
+    -- -- cutscene ended start
+    -- if gameState == 0x1F
+    -- and gameState_last == 0x1E then
+    --     split()
+    -- end
+    -- -- zebes start
+    -- if gameState == 0x6
+    -- and gameState_last == 0x5 then
+    --     split()
+    -- end
+end
+
+function checkReset()
+    if roomID == 0x0
+    and roomID_last != 0 then
+        reset()
+        return
+    end
+end
