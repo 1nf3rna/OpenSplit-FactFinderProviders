@@ -37,13 +37,8 @@ Watches:
     type: "U8"
     bank: "WRAM"
 
-  - name: "ceresBosses"
-    address: "0xD82E"
-    type: "U8"
-    bank: "WRAM"
-
-  - name: "crateriaBosses"
-    address: "0xD828"
+  - name: "maxPowerBombs"
+    address: "0x9D0"
     type: "U8"
     bank: "WRAM"
 
@@ -82,11 +77,6 @@ Watches:
     type: "U16"
     bank: "WRAM"
 
-  - name: "crateriaItems"
-    address: "0xD870"
-    type: "U8"
-    bank: "WRAM"
-
   - name: "brinteriaItems"
     address: "0xD871"
     type: "U8"
@@ -96,27 +86,7 @@ Watches:
     address: "0xD872"
     type: "U8"
     bank: "WRAM"
-
-  - name: "brinteriaItems3"
-    address: "0xD873"
-    type: "U8"
-    bank: "WRAM"
-
-  - name: "brinteriaItems4"
-    address: "0xD874"
-    type: "U8"
-    bank: "WRAM"
-
-  - name: "brinteriaItems5"
-    address: "0xD875"
-    type: "U8"
-    bank: "WRAM"
-
-  - name: "norfairItems1"
-    address: "0xD876"
-    type: "U8"
-    bank: "WRAM"
-
+    
   - name: "norfairItems2"
     address: "0xD877"
     type: "U8"
@@ -127,33 +97,12 @@ Watches:
     type: "U8"
     bank: "WRAM"
 
-  - name: "norfairItems4"
-    address: "0xD879"
-    type: "U8"
-    bank: "WRAM"
-
-  - name: "norfairItems5"
-    address: "0xD87A"
-    type: "U8"
-    bank: "WRAM"
-
   - name: "wreckedShipItems"
     address: "0xD880"
     type: "U8"
     bank: "WRAM"
 
-  - name: "maridiaItems1"
-    address: "0xD881"
-    type: "U8"
-    bank: "WRAM"
-    
-  - name: "maridiaItems2"
-    address: "0xD882"
-    type: "U8"
-    bank: "WRAM"
-    
   - name: "maridiaItems3"
     address: "0xD883"
     type: "U8"
     bank: "WRAM"
-    
