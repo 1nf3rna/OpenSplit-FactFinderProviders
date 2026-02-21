@@ -76,3 +76,34 @@ Watches:
     address: "0xFB2"
     type: "U16"
     bank: "WRAM"
+
+  - name: "brinteriaItems"
+    address: "0xD871"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "brinteriaItems2"
+    address: "0xD872"
+    type: "U8"
+    bank: "WRAM"
+    
+  - name: "norfairItems2"
+    address: "0xD877"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "norfairItems3"
+    address: "0xD878"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "wreckedShipItems"
+    address: "0xD880"
+    type: "U8"
+    bank: "WRAM"
+
+  - name: "maridiaItems3"
+    address: "0xD883"
+    type: "U8"
+    bank: "WRAM"
+    
