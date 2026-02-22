@@ -92,22 +92,22 @@ Watches:
     type: "U8"
     bank: "WRAM"
 
-  - name: "brinteriaItems2"
+  - name: "brinstarItems2"
     address: "0xD872"
     type: "U8"
     bank: "WRAM"
 
-  - name: "brinteriaItems3"
+  - name: "brinstarItems3"
     address: "0xD873"
     type: "U8"
     bank: "WRAM"
 
-  - name: "brinteriaItems4"
+  - name: "brinstarItems4"
     address: "0xD874"
     type: "U8"
     bank: "WRAM"
 
-  - name: "brinteriaItems5"
+  - name: "brinstarItems5"
     address: "0xD875"
     type: "U8"
     bank: "WRAM"
