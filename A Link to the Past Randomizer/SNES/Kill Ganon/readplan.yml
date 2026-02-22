@@ -7,7 +7,7 @@ Watches:
     type: "U8"
     bank: "wram"
 
-  - name: "fileSelect"
+  - name: "gamemode"
     address: "0x10"
     type: "U8"
     bank: "wram"
