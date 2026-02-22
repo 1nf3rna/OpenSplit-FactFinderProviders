@@ -7,13 +7,14 @@ end
 function checkStage()
     if triforce == 0x93 then
         split()
+        return
     end
 end
 
 
 function checkStart()
-    if fileSelect == 0x05
-    fileSelect_last == 0x01
+    if gamemode == 0x05
+    gamemode_last == 0x01
     and (0x80 & player1input) ~= 0 then
         split()
         return
