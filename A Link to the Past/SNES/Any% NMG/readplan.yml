@@ -1,0 +1,58 @@
+Name: "A Link to the Past (Any% NMG)"
+Platform: "SNES"
+ReadInterval: 8
+Watches:
+  - name: "mapID"
+    address: "0x40C"
+    type: "U8"
+    bank: "wram"
+
+  - name: "world"
+    address: "0xAA4"
+    type: "U8"
+    bank: "wram"
+
+  - name: "linkState"
+    address: "0x354"
+    type: "U8"
+    bank: "wram"
+
+  - name: "triforce"
+    address: "0x8A"
+    type: "U8"
+    bank: "wram"
+
+  - name: "gamemode"
+    address: "0x10"
+    type: "U8"
+    bank: "wram"
+
+  - name: "player1input"
+    address: "0xF0"
+    type: "U8"
+    bank: "wram"
+
+  - name: "player1inputcont"
+    address: "0xF2"
+    type: "U8"
+    bank: "wram"
+
+  - name: "yPos"
+    address: "0xFC4"
+    type: "U16"
+    bank: "wram"
+
+  - name: "maptile"
+    address: "0xA0"
+    type: "U16"
+    bank: "wram"
+
+  - name: "fileLoaded"
+    address: "0x221"
+    type: "U16"
+    bank: "wram"
+
+  - name: "music"
+    address: "0x130"
+    type: "U8"
+    bank: "wram"
