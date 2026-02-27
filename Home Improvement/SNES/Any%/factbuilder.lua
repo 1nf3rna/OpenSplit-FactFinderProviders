@@ -1,6 +1,14 @@
+state = {
+    started = false
+}
+
 function onTick()
-    checkStart()
-    checkReset()
+    if not started then
+        checkStart()
+    end
+    if started then
+        checkReset()
+    end
     checkStage()
 end
 
@@ -36,6 +44,7 @@ function checkStage()
         and substage == 4 then
             if FBossHP == 0 then
                 split()
+                started == false
             	return
             end
         end
@@ -54,6 +63,7 @@ function checkStart()
         and gameplay == 17
         and play_state == 0 then
             split()
+            started == true
         end
     end
 end
@@ -64,6 +74,7 @@ function checkReset()
     and gameplay_last == 17
     and gameplay == 0 then
         reset()
+        started == false
         return
     end
 
@@ -85,6 +96,7 @@ function checkReset()
     and substage == 0
     and stage == 0 then
         reset()
+        started == false
         return
     end
 end

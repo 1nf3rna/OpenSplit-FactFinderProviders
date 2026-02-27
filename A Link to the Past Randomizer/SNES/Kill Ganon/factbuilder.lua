@@ -1,12 +1,21 @@
+state = {
+    started = false
+}
+
 function onTick()
-    checkStart()
-    -- checkReset()
+    if not started then
+        checkStart()
+    end
+    -- if started then
+    --     checkReset()
+    -- end
     checkStage()
 end
 
 function checkStage()
     if triforce == 0x93 then
         split()
+        started == false
         return
     end
 end
@@ -17,6 +26,7 @@ function checkStart()
     and ((0xD0 & player1input) ~= 0
     or (0xC0 & player1inputcont) ~= 0) then
         split()
+        started == true
         return
     end
 end

@@ -126,6 +126,7 @@ function checkStage()
         if maptile == ganonRoom
         and triforce == fadeOut then
             split()
+            started == false
             return
         end
     end

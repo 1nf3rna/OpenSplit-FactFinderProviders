@@ -1,6 +1,14 @@
+state = {
+    started = false
+}
+
 function onTick()
-    checkStart()
-    checkReset()
+    if not started then
+        checkStart()
+    end
+    if started then
+        checkReset()
+    end
     checkStage()
 end
 
@@ -846,16 +854,19 @@ function checkStart()
     if gameState == 0x1F
     and gameState_last == 0x2 then
         split()
+        started == true
     end
     -- -- cutscene ended start
     -- if gameState == 0x1F
     -- and gameState_last == 0x1E then
     --     split()
+        -- started == true
     -- end
     -- -- zebes start
     -- if gameState == 0x6
     -- and gameState_last == 0x5 then
     --     split()
+        -- started == true
     -- end
 end
 
@@ -863,6 +874,7 @@ function checkReset()
     if roomID == 0x0
     and roomID_last != 0 then
         reset()
+        started == false
         return
     end
 end

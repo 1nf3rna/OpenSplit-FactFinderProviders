@@ -17,11 +17,16 @@ function checkStage()
     and world == 0x5 then
         -- check final boss state
         if BossHP == 0x0
-        and BossHP_last > 0
-        and (shopPlayerID == 0x33
-        or shopPlayerID == 0xEF) then
-            split()
-            return
+        and BossHP_last > 0 then
+            if shopPlayerID == 0x33 then
+                split()
+                return
+            end
+            if shopPlayerID == 0xEF then
+                split()
+                started == false
+                return
+            end
         end
         --check 4-4 "finish" state
         if exitCount > 0
