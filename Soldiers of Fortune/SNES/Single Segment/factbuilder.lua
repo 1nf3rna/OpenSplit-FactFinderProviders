@@ -1,7 +1,15 @@
+state = {
+    started = false
+}
+
 function onTick()
-    checkStart()
-    checkReset()
-    checkStage()
+    if not state.started then
+        checkStart()
+    end
+    if state.started then
+        checkReset()
+    end
+        checkStage()
 end
 
 function checkStage()
@@ -74,15 +82,11 @@ function checkStart()
     if world == 0xFF
     and exitCount == 0x0
     and levelComplete == 0x0 then
-        if (player1input > 0x0
-        or player2input > 0x0)
-        and shopPlayerID_last == 0x0A
-        and shopPlayerID == 0x0B
-        and scoreScreen_last == 0x0
-        and scoreScreen == 0x80
-        and shopScreen_last == 0x0
+        if shopScreen_last == 0x0
         and shopScreen == 0x80 then
             split()
+            state.started = true
+            return
         end
     end
 end
@@ -91,6 +95,7 @@ function checkReset()
     if level == 0
     and world == 0 then
         reset()
+        state.started = false
         return
     end
 end
