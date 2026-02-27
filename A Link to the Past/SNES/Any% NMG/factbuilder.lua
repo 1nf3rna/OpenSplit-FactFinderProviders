@@ -76,39 +76,58 @@ function onTick()
 end
 
 function checkStage()
-    -- Escaped
-    if world == dungeon
-    and mapID == sanctuary
-    and yPos == door
-    and maptile == sancDoor
-    and gamemode == transition
-    and gamemode_last == inDungeon then
-        split()
-        return
-    end
-    -- Eastern Palace
-    if world == dungeon
-    and mapID == eastern
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Desert Palace
-    if world == dungeon
-    and mapID == desert
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Tower of Hera
-    if world == dungeon
-    and mapID == hera
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
+    if world == dungeon then
+        -- Escaped
+        if mapID == sanctuary
+        and yPos == door
+        and maptile == sancDoor
+        and gamemode == transition
+        and gamemode_last == inDungeon then
+            split()
+            return
+        end
+        --pendant/crystal collected
+        if linkState == swordUP
+        and linkState_last ~= swordUP then
+            -- Eastern Palace
+            -- Desert Palace
+            -- Tower of Hera
+            -- Palace of Darkness
+            -- Thieves Town
+            -- Skull Woods
+            -- Ice Palace
+            -- Swamp Palace
+            -- Misery Mire
+            -- Turtle Rock
+            if mapID == eastern
+            or mapID == desert
+            or mapID == hera
+            or mapID == PoD
+            or mapID == thieves
+            or mapID == skullWoods
+            or mapID == ice
+            or mapID == swamp
+            or mapID == mire
+            or mapID == turtleRock then
+                split()
+                return
+            end
+            -- Castle Conquered entering Agh 1
+            -- Ganon's Tower entering Agh 2
+            if (mapID == tower
+            or mapID == GT)
+            and music == bossMusic
+            and music_last ~= bossMusic then
+                split()
+                return
+            end
+        end
+        -- finish
+        if maptile == ganonRoom
+        and triforce == fadeOut then
+            split()
+            return
+        end
     end
     -- Master Sword
     if  world == lightWorld
@@ -117,98 +136,12 @@ function checkStage()
         split()
         return
     end
-    -- Castle Conquered entering Agh 1
-    if world == dungeon
-    and mapID == tower
-    and music == bossMusic
-    and music_last ~= bossMusic then
-        split()
-        return
-    end
     -- Agh 1 beaten on pyramid
-    if world == darkWorld
-    and maptile == pyramid
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Palace of Darkness
-    if world == dungeon
-    and mapID == PoD
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Thieves Town
-    if world == dungeon
-    and mapID == thieves
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Skull Woods
-    if world == dungeon
-    and mapID == skullWoods
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Ice Palace
-    if world == dungeon
-    and mapID == ice
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Swamp Palace
-    if world == dungeon
-    and mapID == swamp
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Misery Mire
-    if world == dungeon
-    and mapID == mire
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Turtle Rock
-    if world == dungeon
-    and mapID == turtleRock
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- Ganon's Tower entering Agh 2
-    if world == dungeon
-    and mapID == GT
-    and music == bossMusic
-    and music_last ~= bossMusic then
-        split()
-        return
-    end
     -- Agh 2 beaten
     if world == darkWorld
     and maptile == pyramid
     and linkState == swordUP
     and linkState_last ~= swordUP then
-        split()
-        return
-    end
-    -- finish
-    if world == dungeon
-    and maptile == ganonRoom
-    and triforce == fadeOut then
         split()
         return
     end
