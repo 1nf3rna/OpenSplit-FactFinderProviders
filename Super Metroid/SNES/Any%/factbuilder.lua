@@ -224,19 +224,19 @@ function checkStage()
         return
     end
     -- metroid 1
-        if roomID == 0xDB31
+    if roomID == 0xDB31
     and roomID_last == 0xDAE1 then
         split()
         return
     end
     -- metroid 2
-        if roomID == 0xDB7D
+    if roomID == 0xDB7D
     and roomID_last == 0xDB31 then
         split()
         return
     end
     -- metroid 3
-        if roomID == 0xDBCD
+    if roomID == 0xDBCD
     and roomID_last == 0xDB7D then
         split()
         return
