@@ -11,11 +11,11 @@ function checkStage()
     end
 end
 
-
 function checkStart()
     if gamemode == 0x05
     gamemode_last == 0x01
-    and (0x80 & player1input) ~= 0 then
+    and ((0xD0 & player1input) ~= 0
+    or (0xC0 & player1inputcont) ~= 0) then
         split()
         return
     end
