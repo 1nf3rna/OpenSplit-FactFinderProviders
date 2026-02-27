@@ -270,7 +270,7 @@ function checkStage()
     end
     -- Final Escape
     if shipAI == 0xAA4F
-    and shipAI_last != 0xAA4F
+    and shipAI_last ~= 0xAA4F
     and (eventFlags & 0x40) > 0 then
         split()
         return
@@ -297,7 +297,7 @@ end
 
 function checkReset()
     if roomID == 0x0
-    and roomID_last != 0 then
+    and roomID_last ~= 0 then
         reset()
         return
     end
