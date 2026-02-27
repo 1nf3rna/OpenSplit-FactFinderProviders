@@ -3,10 +3,10 @@ state = {
 }
 
 function onTick()
-    if not started then
+    if not state.started then
         checkStart()
     end
-    if started then
+    if state.started then
         checkReset()
     end
     checkStage()
@@ -44,7 +44,7 @@ function checkStage()
         and substage == 4 then
             if FBossHP == 0 then
                 split()
-                started == false
+                state.started = false
             	return
             end
         end
@@ -63,7 +63,7 @@ function checkStart()
         and gameplay == 17
         and play_state == 0 then
             split()
-            started == true
+            state.started = true
         end
     end
 end
@@ -74,7 +74,7 @@ function checkReset()
     and gameplay_last == 17
     and gameplay == 0 then
         reset()
-        started == false
+        state.started = false
         return
     end
 
@@ -96,7 +96,7 @@ function checkReset()
     and substage == 0
     and stage == 0 then
         reset()
-        started == false
+        state.started = false
         return
     end
 end

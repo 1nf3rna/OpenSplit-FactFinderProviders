@@ -66,10 +66,10 @@ state = {
 }
 
 function onTick()
-    if not started then
+    if not state.started then
         checkStart()
     end
-    if started then
+    if state.started then
         checkReset()
     end
     checkStage()
@@ -126,7 +126,7 @@ function checkStage()
         if maptile == ganonRoom
         and triforce == fadeOut then
             split()
-            started == false
+            state.started = false
             return
         end
     end
@@ -154,7 +154,7 @@ function checkStart()
     and ((0xD0 & player1input) ~= 0
     or (0xC0 & player1inputcont) ~= 0) then
         split()
-        started == true
+        state.started = true
         return
     end
 end
@@ -163,7 +163,7 @@ function checkReset()
     if fileloaded ~= 0xFFFF
     and fileloaded_last == 0xFFFF then
         reset()
-        started == false
+        state.started = false
         return
     end
 end

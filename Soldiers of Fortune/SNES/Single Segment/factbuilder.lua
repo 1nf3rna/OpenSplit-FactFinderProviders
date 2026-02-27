@@ -24,7 +24,7 @@ function checkStage()
             end
             if shopPlayerID == 0xEF then
                 split()
-                started == false
+                state.started = false
                 return
             end
         end
