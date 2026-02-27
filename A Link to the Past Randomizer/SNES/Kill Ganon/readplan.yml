@@ -16,3 +16,8 @@ Watches:
     address: "0xF0"
     type: "U8"
     bank: "wram"
+
+  - name: "player1inputcont"
+    address: "0xF2"
+    type: "U8"
+    bank: "wram"
