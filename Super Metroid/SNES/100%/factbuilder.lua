@@ -26,27 +26,27 @@ function checkStage()
     end
     -- Boss Kill Checks
     -- Ceres Ridley, Bomb Torizo, Kraid, crocomire, Phantoon, Botwoon, Draygon, goldenTorizo, Ridley, Mother Brain 3
-    if (ceresBosses != ceresBosses_last)
-    or (crateriaBosses != crateriaBosses_last)
-    or (brinstarBosses != brinstarBosses_last)
-    or (norfairBosses != norfairBosses_last)
-    or (wreckedShipBosses != wreckedShipBosses_last)
-    or (maridiaBosses != maridiaBosses_last)
-    or (tourianBosses != tourianBosses_last) then
+    if (ceresBosses > ceresBosses_last)
+    or (crateriaBosses > crateriaBosses_last)
+    or (brinstarBosses > brinstarBosses_last)
+    or (norfairBosses > norfairBosses_last)
+    or (wreckedShipBosses > wreckedShipBosses_last)
+    or (maridiaBosses > maridiaBosses_last)
+    or (tourianBosses > tourianBosses_last) then
         split()
         return
     end
     -- State Checks
     -- Escaped Ceres Station, tube broken, mother brain p1, mother brain p2, final escape
     if (roomID == 0xDF45 and gameState == 0x20 and gameState_last == 0x8)
-    or (roomID == 0xCEFB and eventFlags != eventFlags_last)
+    or (roomID == 0xCEFB and tunnelBreak == 0xD5 and tunnelBreak_last == 0x0)
     or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x4650 and motherBrainHP_last == 0)
     or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x8CA0 and motherBrainHP_last == 0)
-    or (shipAI == 0xAA4F and shipAI_last != 0xAA4F and (eventFlags & 0x40) > 0) then
+    or (roomID == 0x91F8 and shipAI == 0xAA4F and shipAI_last ~= 0xAA4F) then --need to add 1 frame
+    end
         split()
         if shipAI == 0xAA4F
-        and shipAI_last != 0xAA4F
-        and (eventFlags & 0x40) > 0 then
+        and shipAI_last ~= 0xAA4F then
             state.started = false
         end
         return
@@ -55,25 +55,25 @@ function checkStage()
     -- Morph, varia, gravity, bombs, hjb, speed booster, space jump, grapple, xray, springball, screw attack,
     -- spazer, wave, plasma, ice, charge, 
     -- Supers, Missiles, Power Bombs, etanks, reserve
-    if (unlockedEquipment1 != unlockedEquipment1_last)
-    or (unlockedEquipment2 != unlockedEquipment2_last)
-    or (unlockedBeams != unlockedBeams_last)
-    or (unlockedCharge != unlockedCharge_last)
-    or (crateriaItems != crateriaItems_last)
-    or (brinteriaItems != brinteriaItems_last)
-    or (brinstarItems2 != brinstarItems2_last)
-    or (brinstarItems3 != brinstarItems3_last)
-    or (brinstarItems4 != brinstarItems4_last)
-    or (brinstarItems5 != brinstarItems5_last)
-    or (norfairItems1 != norfairItems1_last)
-    or (norfairItems2 != norfairItems2_last)
-    or (norfairItems3 != norfairItems3_last)
-    or (norfairItems4 != norfairItems4_last)
-    or (norfairItems5 != norfairItems5_last)
-    or (wreckedShipItems != wreckedShipItems_last)
-    or (maridiaItems1 != maridiaItems1_last)
-    or (maridiaItems2 != maridiaItems2_last)
-    or (maridiaItems3 != maridiaItems3_last) then
+    if (unlockedEquipment1 > unlockedEquipment1_last)
+    or (unlockedEquipment2 > unlockedEquipment2_last)
+    or (unlockedBeams > unlockedBeams_last)
+    or (unlockedCharge > unlockedCharge_last)
+    or (crateriaItems > crateriaItems_last)
+    or (brinteriaItems > brinteriaItems_last)
+    or (brinstarItems2 > brinstarItems2_last)
+    or (brinstarItems3 > brinstarItems3_last)
+    or (brinstarItems4 > brinstarItems4_last)
+    or (brinstarItems5 > brinstarItems5_last)
+    or (norfairItems1 > norfairItems1_last)
+    or (norfairItems2 > norfairItems2_last)
+    or (norfairItems3 > norfairItems3_last)
+    or (norfairItems4 > norfairItems4_last)
+    or (norfairItems5 > norfairItems5_last)
+    or (wreckedShipItems > wreckedShipItems_last)
+    or (maridiaItems1 > maridiaItems1_last)
+    or (maridiaItems2 > maridiaItems2_last)
+    or (maridiaItems3 > maridiaItems3_last) then
         split()
         return
     end
@@ -473,8 +473,8 @@ function checkStage()
     -- end
     -- -- Tunnel Broken
     -- if roomID == 0xCEFB
-    -- and (eventFlags & 0x8) > 0
-    -- and (eventFlags_last & 0x8) == 0 then
+    -- and tunnelBreak == 0xD5
+    -- and tunnelBreak_last == 0x0 then
     --     split()
     --     return
     -- end
@@ -660,9 +660,9 @@ function checkStage()
     --     split()
     --     return
     -- end
-    -- -- Entering Norfair
-    -- if roomID == 0xA7DE
-    -- and roomID_last == 0xA6A1 then
+    -- -- Entering Lower Norfair
+    -- if roomID == 0xB236
+    -- and roomID_last == 0xAF3F then
     --     split()
     --     return
     -- end
@@ -784,11 +784,7 @@ function checkStage()
     -- end
     -- -- Golden 4
     -- if roomID == 0xA66A
-    -- and roomID_last == 0xA5ED
-    -- and (norfairBosses & 0x1) > 0
-    -- and (brinstarBosses & 0x1) > 0
-    -- and (maridiaBosses & 0x1) > 0
-    -- and (wreckedShipBosses & 0x1) > 0 then
+    -- and roomID_last == 0xA5ED then
     --     split()
     --     return
     -- end
@@ -846,18 +842,26 @@ function checkStage()
     --     return
     -- end
     -- -- Final Escape
-    -- if shipAI == 0xAA4F
-    -- and shipAI_last != 0xAA4F
-    -- and (eventFlags & 0x40) > 0 then
+    -- if roomID == 0x91F8
+    -- and shipAI == 0xAA4F
+    -- and shipAI_last ~= 0xAA4F then
     --     split()
+    --     state.started = false
     --     return
     -- end
 end
 
 function checkStart()
-    -- normal start
-    if gameState == 0x1F
-    and gameState_last == 0x2 then
+    -- normal start 17 frames late
+    -- if gameState == 0x1F
+    -- and gameState_last == 0x2 then
+    --     split()
+    --     state.started = true
+    -- end
+    if gameState == 0x2
+    and option_menu == 0x0
+    and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
+    or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
         split()
         state.started = true
     end
@@ -877,7 +881,7 @@ end
 
 function checkReset()
     if roomID == 0x0
-    and roomID_last != 0 then
+    and roomID_last ~= 0 then
         reset()
         state.started = false
         return
