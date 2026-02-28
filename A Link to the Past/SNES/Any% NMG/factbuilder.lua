@@ -5,7 +5,7 @@ addrs = {
     transition = 0xF, --room to overworld 
     dungeon = 0xA,
     lightWorld = 0x1,
-    darkWorld = 0x2,
+    darkWorld = 0xB,
     swordUP = 0x24,
     masterGet = 0x17,
     sanctuary = 0x0,
@@ -21,31 +21,19 @@ addrs = {
     thieves = 0x16,
     turtleRock = 0x18,
     GT = 0x1a,
+    overworld = 0xFF,
     pyramid = 0x20,
+    pyramidOpen = 0xD,
     bossMusic = 0x15,
     fadeOut = 0x93,
     ganonRoom = 0x0,
     sancDoor = 0x12,
-    door = 0x3E3,
-    -- pendants = 0xF374,
-    -- crystals = 0xF37A
+    door = 0x3E2,
+    hole = 0x65C,
+    default = 0x0,
+    flying = 0x1D,
+    running = 0xFFFF,
 }
-
--- pendantVals = {
---     ep = 0x04,
---     dp = 0x02,
---     toh = 0x01
--- }
-
--- crystalVals = {
---     mm = 0x01,
---     pod = 0x02,
---     ip = 0x04,
---     tr = 0x08,
---     sp = 0x10,
---     tt = 0x20,
---     sw = 0x40
--- }
 
 state = {
     started = false,
@@ -78,7 +66,7 @@ end
 function checkStage()
     if world == addrs.dungeon then
         -- Escaped
-        if mapID == addrs.sanctuary
+        if mapID >= addrs.sanctuary
         and yPos == addrs.door
         and maptile == addrs.sancDoor
         and gamemode == addrs.transition
@@ -112,15 +100,15 @@ function checkStage()
                 split()
                 return
             end
-            -- Castle Conquered entering Agh 1
-            -- Ganon's Tower entering Agh 2
-            if (mapID == addrs.tower
-            or mapID == addrs.GT)
-            and music == addrs.bossMusic
-            and music_last ~= addrs.bossMusic then
-                split()
-                return
-            end
+        end
+        -- Castle Conquered entering Agh 1
+        -- Ganon's Tower entering Agh 2
+        if (mapID == addrs.tower
+        or mapID == addrs.GT)
+        and music == addrs.bossMusic
+        and music_last ~= addrs.bossMusic then
+            split()
+            return
         end
         -- finish
         if maptile == addrs.ganonRoom
@@ -137,14 +125,23 @@ function checkStage()
         split()
         return
     end
-    -- Agh 1 beaten on pyramid
-    -- Agh 2 beaten
     if world == addrs.darkWorld
-    and maptile == addrs.pyramid
-    and linkState == addrs.swordUP
-    and linkState_last ~= addrs.swordUP then
-        split()
-        return
+    and mapID == addrs.overworld
+    and (maptile == addrs.pyramid
+    or maptile == addrs.pyramidOpen) then
+        -- Agh 1 beaten on pyramid
+        if linkState == addrs.swordUP
+        and linkState_last ~= addrs.swordUP then
+            split()
+            return
+        end
+        -- Agh 2 beaten
+        if yPos == addrs.hole
+        and linkState == addrs.default
+        and linkState_last == addrs.flying then
+            split()
+            return
+        end
     end
 end
 
@@ -160,8 +157,8 @@ function checkStart()
 end
 
 function checkReset()
-    if fileloaded ~= 0xFFFF
-    and fileloaded_last == 0xFFFF then
+    if fileloaded ~= running
+    and fileloaded_last == running then
         reset()
         state.started = false
         return
