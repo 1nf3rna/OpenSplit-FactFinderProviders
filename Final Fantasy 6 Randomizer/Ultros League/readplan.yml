@@ -1,0 +1,30 @@
+Name: "Final Fantasy 6 World's Collide Ultros League"
+Platform: "SNES"
+ReadInterval: 20
+Watches:
+  - name: "sfx"
+    address: "0xE9E9"
+    type: "U8"
+    bank: "wram"
+
+  - name: "battleidx"
+    address: "0x11E0"
+    type: "U16"
+    bank: "wram"
+
+  - name: "mapid"
+    address: "0x1F65"
+    type: "U8"
+    bank: "wram"
+  
+  - name: "espers"
+    address: "0x1FC8"
+    type: "U8"
+    bank: "wram"
+
+  - name: "characters"
+    address: "0x1EDE"
+    type: "FlagCount"
+    bank: "wram"
+    size: 2
+    mask: "0x3FFF"
