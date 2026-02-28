@@ -5,7 +5,7 @@ addrs = {
     transition = 0xF, --room to overworld 
     dungeon = 0xA,
     lightWorld = 0x1,
-    lightWorld = 0x2,
+    darkWorld = 0x2,
     swordUP = 0x24,
     masterGet = 0x17,
     sanctuary = 0x0,
@@ -26,7 +26,7 @@ addrs = {
     fadeOut = 0x93,
     ganonRoom = 0x0,
     sancDoor = 0x12,
-    door = 0x3E3
+    door = 0x3E3,
     -- pendants = 0xF374,
     -- crystals = 0xF37A
 }
@@ -76,19 +76,19 @@ function onTick()
 end
 
 function checkStage()
-    if world == dungeon then
+    if world == addrs.dungeon then
         -- Escaped
-        if mapID == sanctuary
-        and yPos == door
-        and maptile == sancDoor
-        and gamemode == transition
-        and gamemode_last == inDungeon then
+        if mapID == addrs.sanctuary
+        and yPos == addrs.door
+        and maptile == addrs.sancDoor
+        and gamemode == addrs.transition
+        and gamemode_last == addrs.inDungeon then
             split()
             return
         end
         --pendant/crystal collected
-        if linkState == swordUP
-        and linkState_last ~= swordUP then
+        if linkState == addrs.swordUP
+        and linkState_last ~= addrs.swordUP then
             -- Eastern Palace
             -- Desert Palace
             -- Tower of Hera
@@ -99,60 +99,60 @@ function checkStage()
             -- Swamp Palace
             -- Misery Mire
             -- Turtle Rock
-            if mapID == eastern
-            or mapID == desert
-            or mapID == hera
-            or mapID == PoD
-            or mapID == thieves
-            or mapID == skullWoods
-            or mapID == ice
-            or mapID == swamp
-            or mapID == mire
-            or mapID == turtleRock then
+            if mapID == addrs.eastern
+            or mapID == addrs.desert
+            or mapID == addrs.hera
+            or mapID == addrs.PoD
+            or mapID == addrs.thieves
+            or mapID == addrs.skullWoods
+            or mapID == addrs.ice
+            or mapID == addrs.swamp
+            or mapID == addrs.mire
+            or mapID == addrs.turtleRock then
                 split()
                 return
             end
             -- Castle Conquered entering Agh 1
             -- Ganon's Tower entering Agh 2
-            if (mapID == tower
-            or mapID == GT)
-            and music == bossMusic
-            and music_last ~= bossMusic then
+            if (mapID == addrs.tower
+            or mapID == addrs.GT)
+            and music == addrs.bossMusic
+            and music_last ~= addrs.bossMusic then
                 split()
                 return
             end
         end
         -- finish
-        if maptile == ganonRoom
-        and triforce == fadeOut then
+        if maptile == addrs.ganonRoom
+        and triforce == addrs.fadeOut then
             split()
             state.started = false
             return
         end
     end
     -- Master Sword
-    if  world == lightWorld
-    and linkState == masterGet
-    and linkState_last ~= masterGet then
+    if  world == addrs.lightWorld
+    and linkState == addrs.masterGet
+    and linkState_last ~= addrs.masterGet then
         split()
         return
     end
     -- Agh 1 beaten on pyramid
     -- Agh 2 beaten
-    if world == darkWorld
-    and maptile == pyramid
-    and linkState == swordUP
-    and linkState_last ~= swordUP then
+    if world == addrs.darkWorld
+    and maptile == addrs.pyramid
+    and linkState == addrs.swordUP
+    and linkState_last ~= addrs.swordUP then
         split()
         return
     end
 end
 
 function checkStart()
-    if gamemode == loadFile
-    gamemode_last == selectFile
-    and ((0xD0 & player1input) ~= 0
-    or (0xC0 & player1inputcont) ~= 0) then
+    if gamemode == addrs.loadFile
+    and gamemode_last == addrs.selectFile then
+    -- and ((0xD0 & player1input) ~= 0
+    -- or (0xC0 & player1inputcont) ~= 0) then
         split()
         state.started = true
         return
