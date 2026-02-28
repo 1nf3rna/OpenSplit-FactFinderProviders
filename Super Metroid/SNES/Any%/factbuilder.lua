@@ -15,8 +15,7 @@ end
 function checkStage()
     -- Ceres Ridley
     if roomID == 0xE0B5
-    and (ceresBosses & 0x1) > 0
-    and (ceresBosses_last & 0x1) == 0 then
+    and ceresBosses > ceresBosses_last then
         split()
         return
     end
@@ -29,8 +28,7 @@ function checkStage()
     end
     -- Morph Aquired
     if roomID == 0x9E9F
-    and (unlockedEquipment2 & 0x4) > 0
-    and (unlockedEquipment2_last & 0x4) == 0 then
+    and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
@@ -42,15 +40,13 @@ function checkStage()
     end
     -- Bombs Aquired
     if roomID == 0x9804
-    and (unlockedEquipment1 & 0x10) > 0
-    and (unlockedEquipment1_last & 0x10) == 0 then
+    and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Bomb Torizo
     if roomID == 0x9804
-    and (crateriaBosses & 0x4) > 0
-    and (crateriaBosses_last & 0x4) == 0 then
+    and crateriaBosses > crateriaBosses_last then
         split()
         return
     end
@@ -74,22 +70,19 @@ function checkStage()
     end
     -- Charge Beam Aquired
     if roomID == 0x9D19
-    and (unlockedCharge & 0x10) > 0
-    and (unlockedCharge_last & 0x10) == 0 then
+    and unlockedCharge > unlockedCharge_last then
         split()
         return
     end
     -- Kraid
     if roomID == 0xA59F
-    and (brinstarBosses & 0x1) > 0
-    and (brinstarBosses_last & 0x1) == 0 then
+    and brinstarBosses > brinstarBosses_last then
         split()
         return
     end
     -- Varia Suit Aquired
     if roomID == 0xA6E2
-    and (unlockedEquipment2 & 0x1) > 0
-    and (unlockedEquipment2_last & 0x1) == 0 then
+    and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
@@ -101,15 +94,13 @@ function checkStage()
     end
     -- High Jump Boots
     if roomID == 0xA9E5
-    and (unlockedEquipment1 & 0x1) > 0
-    and (unlockedEquipment1_last & 0x1) == 0 then
+    and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Speed Booster Aquired
     if roomID == 0xAD1B
-    and (unlockedEquipment1 & 0x20) > 0
-    and (unlockedEquipment1_last & 0x20) == 0 then
+    and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
@@ -121,8 +112,7 @@ function checkStage()
     end
     -- Wave Beam Aquired
     if roomID == 0xADDE
-    and (unlockedBeams & 0x1) > 0
-    and (unlockedBeams_last & 0x1) == 0 then
+    and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
@@ -134,8 +124,7 @@ function checkStage()
     end
     -- Phantoon
     if roomID == 0xCD13
-    and (wreckedShipBosses & 0x1) > 0
-    and (wreckedShipBosses_last & 0x1) == 0 then
+    and wreckedShipBosses > wreckedShipBosses_last then
         split()
         return
     end
@@ -147,22 +136,20 @@ function checkStage()
     end
     -- Gravity Suit Aquired
     if roomID == 0xCE40
-    and (unlockedEquipment2 & 0x20) > 0
-    and (unlockedEquipment2_last & 0x20) == 0 then
+    and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
     -- Tunnel Broken
     if roomID == 0xCEFB
-    and (eventFlags & 0x8) > 0
-    and (eventFlags_last & 0x8) == 0 then
+    and tunnelBreak == 0xD5
+    and tunnelBreak_last == 0x0 then
         split()
         return
     end
     -- Botwoon
     if roomID == 0xD95E
-    and (maridiaBosses & 0x2) > 0
-    and (maridiaBosses_last & 0x2) == 0 then
+    and maridiaBosses > maridiaBosses_last then
         split()
         return
     end
@@ -174,52 +161,43 @@ function checkStage()
     end
     -- Draygon
     if roomID == 0xDA60
-    and (maridiaBosses & 0x1) > 0
-    and (maridiaBosses_last & 0x1) == 0 then
+    and maridiaBosses > maridiaBosses_last then
         split()
         return
     end
     -- Space Jump Aquired
     if roomID == 0xD9AA
-    and (unlockedEquipment1 & 0x2) > 0
-    and (unlockedEquipment1_last & 0x2) == 0 then
+    and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Plasma Aquired
     if roomID == 0xD2AA
-    and (unlockedBeams & 0x8) > 0
-    and (unlockedBeams_last & 0x8) == 0 then
+    and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
     -- Ice Beam Aquired
     if roomID == 0xA890
-    and (unlockedBeams & 0x2) > 0
-    and (unlockedBeams_last & 0x2) == 0 then
+    and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
-    -- Entering Norfair
-    if roomID == 0xA7DE
-    and roomID_last == 0xA6A1 then
+    -- Entering Lower Norfair
+    if roomID == 0xB236
+    and roomID_last == 0xAF3F then
         split()
         return
     end
     -- Ridley Dead/Room
     if roomID == 0xB32E
-    and (norfairBosses & 0x1) > 0
-    and (norfairBosses_last & 0x1) == 0 then
+    and norfairBosses > norfairBosses_last then
         split()
         return
     end
     -- Golden 4
     if roomID == 0xA66A
-    and roomID_last == 0xA5ED
-    and (norfairBosses & 0x1) > 0
-    and (brinstarBosses & 0x1) > 0
-    and (maridiaBosses & 0x1) > 0
-    and (wreckedShipBosses & 0x1) > 0 then
+    and roomID_last == 0xA5ED then
         split()
         return
     end
@@ -271,15 +249,14 @@ function checkStage()
     end
     -- Mother Brain 3
     if roomID == 0xDD58
-    and (tourianBosses & 0x2) > 0
-    and (tourianBosses_last & 0x2) == 0 then
+    and tourianBosses > tourianBosses_last then
         split()
         return
     end
-    -- Final Escape
-    if shipAI == 0xAA4F
-    and shipAI_last ~= 0xAA4F
-    and (eventFlags & 0x40) > 0 then
+    -- Final Escape need to add 1 frame
+    if roomID == 0x91F8
+    and shipAI == 0xAA4F
+    and shipAI_last ~= 0xAA4F then
         split()
         state.started = false
         return
@@ -287,9 +264,16 @@ function checkStage()
 end
 
 function checkStart()
-    -- normal start
-    if gameState == 0x1F
-    and gameState_last == 0x2 then
+    -- normal start 17 frames late
+    -- if gameState == 0x1F
+    -- and gameState_last == 0x2 then
+    --     split()
+    --     state.started = true
+    -- end
+    if gameState == 0x2
+    and option_menu == 0x0
+    and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
+    or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
         split()
         state.started = true
     end
