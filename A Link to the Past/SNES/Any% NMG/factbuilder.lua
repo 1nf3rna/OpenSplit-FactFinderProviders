@@ -157,8 +157,8 @@ function checkStart()
 end
 
 function checkReset()
-    if fileloaded ~= running
-    and fileloaded_last == running then
+    if fileLoaded ~= addrs.running
+    and fileLoaded_last == addrs.running then
         reset()
         state.started = false
         return
