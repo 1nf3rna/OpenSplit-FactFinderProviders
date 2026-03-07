@@ -17,11 +17,6 @@ Watches:
     type: "U8"
     bank: "wram"
 
-  - name: "triforce"
-    address: "0x8A"
-    type: "U8"
-    bank: "wram"
-
   - name: "gamemode"
     address: "0x10"
     type: "U8"

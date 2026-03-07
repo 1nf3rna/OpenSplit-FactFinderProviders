@@ -2,6 +2,7 @@ addrs = {
     selectFile = 0x01,
     loadFile = 0x05,
     inDungeon = 0x7,
+    triforceRoom = 0x19,
     transition = 0xF, --room to overworld 
     dungeon = 0xA,
     lightWorld = 0x1,
@@ -25,7 +26,8 @@ addrs = {
     pyramid = 0x20,
     pyramidOpen = 0xD,
     bossMusic = 0x15,
-    fadeOut = 0x93,
+    -- triforceMusic = 0xF1,
+    -- fadeOut = 0x93,
     ganonRoom = 0x0,
     sancDoor = 0x12,
     door = 0x3E2,
@@ -112,7 +114,8 @@ function checkStage()
         end
         -- finish
         if maptile == addrs.ganonRoom
-        and triforce == addrs.fadeOut then
+        and gamemode == addrs.triforceRoom
+        and gamemode_last == addrs.inDungeon then
             split()
             state.started = false
             return
@@ -136,8 +139,7 @@ function checkStage()
             return
         end
         -- Agh 2 beaten
-        if yPos == addrs.hole
-        and linkState == addrs.default
+        if linkState == addrs.default
         and linkState_last == addrs.flying then
             split()
             return
@@ -148,8 +150,6 @@ end
 function checkStart()
     if gamemode == addrs.loadFile
     and gamemode_last == addrs.selectFile then
-    -- and ((0xD0 & player1input) ~= 0
-    -- or (0xC0 & player1inputcont) ~= 0) then
         split()
         state.started = true
         return
