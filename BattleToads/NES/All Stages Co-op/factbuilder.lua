@@ -40,7 +40,7 @@ end
 
 function checkReset()
     if level == 0
-    and level_last != 0 then
+    and level_last ~= 0 then
         reset()
         return
     end
