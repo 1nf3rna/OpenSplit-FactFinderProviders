@@ -1,3 +1,6 @@
+addrs = {
+}
+
 state = {
   started   = false,
   espers = 0,
