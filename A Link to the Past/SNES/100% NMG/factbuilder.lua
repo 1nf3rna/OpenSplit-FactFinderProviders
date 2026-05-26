@@ -26,7 +26,7 @@ addrs = {
     pyramid = 0x20,
     pyramidOpen = 0xD,
     bossMusic = 0x15,
-    fadeOut = 0x93,
+    -- fadeOut = 0x93,
     digGame = 0x68,
     preDigGame = 0x69,
     purpChest = 0x3A,
@@ -37,27 +37,23 @@ addrs = {
     default = 0x0,
     flying = 0x1D,
     running = 0xFFFF,
+    iceRodCave = 0x120,
+    iceRod = 0x1,
 }
 
 state = {
     started = false,
     escape = false,
-    ep = false,
-    dp = false,
-    toh = false,
-    castleTower = false,
-    agaDead = false,
-    pod = false,
-    sp = false,
-    sw = false,
-    tt = false,
-    ip = false,
-    mm = false,
-    tr = false,
+    completeDungeons = 0,
+    masterSword = false,
+    collectionComplete = false,
+    aga1Dead = false,
+    aga2Dead = false,
     ganon_dead = false
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -76,8 +72,19 @@ function checkStage()
         and gamemode == addrs.transition
         and gamemode_last == addrs.inDungeon then
             split()
+            state.escape = true
             return
         end
+        -- Ice Rod Get -- world ID might be wrong
+        if maptile == addrs.iceRodCave
+        and iceRodFlag == addrs.iceRod
+        and gamemode == addrs.transition
+        and gamemode_last == addrs.inDungeon then
+            split()
+            state.collectionComplete = true
+            return
+        end
+        -- VoO Chest Game
         if mapID == addrs.overworld
         and roomFlags == (roomFlags_last + 64)
         and areaIndex == addrs.outcast
@@ -111,6 +118,7 @@ function checkStage()
             or mapID == addrs.mire
             or mapID == addrs.turtleRock then
                 split()
+                state.completeDungeons = state.completeDungeons + 1
                 return
             end
         end
@@ -125,8 +133,10 @@ function checkStage()
         end
         -- finish
         if maptile == addrs.ganonRoom
-        and triforce == addrs.fadeOut then
+        and gamemode == addrs.triforceRoom
+        and gamemode_last == addrs.inDungeon then
             split()
+            state.ganon_dead = true
             state.started = false
             return
         end
@@ -136,8 +146,10 @@ function checkStage()
         if linkState == addrs.masterGet
         and linkState_last ~= addrs.masterGet then
             split()
+            state.masterSword = true
             return
         end
+
     end
     if world == addrs.darkWorld
     and mapID == addrs.overworld then
@@ -152,6 +164,7 @@ function checkStage()
         and linkState == addrs.swordUP
         and linkState_last ~= addrs.swordUP then
             split()
+            state.aga1Dead = true
             return
         end
         -- Agh 2 beaten
@@ -160,6 +173,7 @@ function checkStage()
         and linkState == addrs.default
         and linkState_last == addrs.flying then
             split()
+            state.aga2Dead = true
             return
         end
     end
@@ -177,10 +191,20 @@ function checkStart()
 end
 
 function checkReset()
-    if fileloaded ~= running
-    and fileloaded_last == running then
+    if fileloaded ~= addrs.running
+    and fileloaded_last == addrs.running then
         reset()
         state.started = false
+        state.escape = false
+        state.completeDungeons = 0
+        state.masterSword = false
+        state.collectionComplete = false
+        state.aga1Dead = false
+        state.aga2Dead = false
+        state.ganon_dead = false
         return
     end
+end
+
+function updateState()
 end

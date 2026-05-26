@@ -66,3 +66,8 @@ Watches:
     address: "0x40A"
     type: "U8"
     bank: "wram"
+
+  - name: "iceRodFlag"
+    address: "0xF346"
+    type: "U8"
+    bank: "wram"

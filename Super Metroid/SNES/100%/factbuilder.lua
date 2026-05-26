@@ -1,8 +1,63 @@
+addrs = {
+    OptionsMenu = 0x2,
+    ceresRidley == 0xE0B5,
+    flatRoom == 0xE06B,
+    metroidOne == 0xDAE1,
+    metroidTwo == 0xDB31,
+    metroidThree == 0xDB7D,
+    metroidFour == 0xDBCD,
+    tourianHopper == 0xDC19,
+    seaweedVert == 0xDCFF,
+    bigBoy == 0xDCB1,
+    ceresElevator == 0xDF45,
+    startOfCeresCutscene == 0x20,
+    normalGameplay == 0x8,
+    glassTunnel == 0xCEFB,
+    tunnelBreak == 0xD5,
+    motherBrain == 0xDD58,
+    motherBrainHPP2 == 0x4650,
+    motherBrainHPP3 == 0x8CA0,
+    landingSite == 0x91F8,
+    endShip == 0xAA4F,
+}
+
 state = {
     started = false
+    roomID = 0x0,
+    ceresBosses = 0x0,
+    crateriaBosses = 0x0,
+    brinstarBosses = 0x0,
+    norfairBosses = 0x0,
+    wreckedShipBosses = 0x0,
+    maridiaBosses = 0x0,
+    tourianBosses = 0x0,
+    shipAI = 0x0,
+    gameState = 0x0,
+    tunnelBreak = 0x0,
+    motherBrainHP = 0x0,
+    unlockedEquipment1 = 0x0,
+    unlockedEquipment2 = 0x0,
+    unlockedBeams = 0x0,
+    unlockedCharge = 0x0,
+    crateriaItems = 0x0,
+    brinteriaItems = 0x0,
+    brinstarItems2 = 0x0,
+    brinstarItems3 = 0x0,
+    brinstarItems4 = 0x0,
+    brinstarItems5 = 0x0,
+    norfairItems1 = 0x0,
+    norfairItems2 = 0x0,
+    norfairItems3 = 0x0,
+    norfairItems4 = 0x0,
+    norfairItems5 = 0x0,
+    wreckedShipItems = 0x0,
+    maridiaItems1 = 0x0,
+    maridiaItems2 = 0x0,
+    maridiaItems3 = 0x0,
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -15,12 +70,12 @@ end
 function checkStage()
     -- Room Only Checks
     -- Ceres Ridley, metroid 1, metroid 2, metroid 3, metroid 4, baby
-    if (roomID == 0xE0B5 and roomID_last == 0xE06B)
-    or (roomID == 0xDB31 and roomID_last == 0xDAE1)
-    or (roomID == 0xDB7D and roomID_last == 0xDB31)
-    or (roomID == 0xDBCD and roomID_last == 0xDB7D)
-    or (roomID == 0xDC19 and roomID_last == 0xDBCD)
-    or (roomID == 0xDCFF and roomID_last == 0xDCB1) then
+    if (roomID == addrs.ceresRidley and roomID_last == addrs.flatRoom)
+    or (roomID == addrs.metroidTwo and roomID_last == addrs.metroidOne)
+    or (roomID == addrs.metroidThree and roomID_last == addrs.metroidTwo)
+    or (roomID == addrs.metroidFour and roomID_last == addrs.metroidThree)
+    or (roomID == addrs.tourianHopper and roomID_last == addrs.metroidFour)
+    or (roomID == addrs.seaweedVert and roomID_last == addrs.bigBoy) then
         split()
         return
     end
@@ -38,15 +93,15 @@ function checkStage()
     end
     -- State Checks
     -- Escaped Ceres Station, tube broken, mother brain p1, mother brain p2, final escape
-    if (roomID == 0xDF45 and gameState == 0x20 and gameState_last == 0x8)
-    or (roomID == 0xCEFB and tunnelBreak == 0xD5 and tunnelBreak_last == 0x0)
-    or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x4650 and motherBrainHP_last == 0)
-    or (roomID == 0xDD58 and gameState == 0x8 and motherBrainHP == 0x8CA0 and motherBrainHP_last == 0)
-    or (roomID == 0x91F8 and shipAI == 0xAA4F and shipAI_last ~= 0xAA4F) then --need to add 1 frame
+    if (roomID == addrs.ceresElevator and gameState == addrs.startOfCeresCutscene and gameState_last == addrs.normalGameplay)
+    or (roomID == addrs.glassTunnel and tunnelBreak == addrs.tunnelBreak and tunnelBreak_last == 0x0)
+    or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP2 and motherBrainHP_last == 0)
+    or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP3 and motherBrainHP_last == 0)
+    or (roomID == addrs.landingSite and shipAI == addrs.endShip and shipAI_last ~= addrs.endShip) then --need to add 1 frame
     end
         split()
-        if shipAI == 0xAA4F
-        and shipAI_last ~= 0xAA4F then
+        if shipAI == addrs.endShip
+        and shipAI_last ~= addrs.endShip then
             state.started = false
         end
         return
@@ -858,7 +913,7 @@ function checkStart()
     --     split()
     --     state.started = true
     -- end
-    if gameState == 0x2
+    if gameState == addrs.OptionsMenu
     and option_menu == 0x0
     and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
     or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
@@ -886,4 +941,38 @@ function checkReset()
         state.started = false
         return
     end
+end
+
+function updateState()
+    state.roomID = roomID
+    state.ceresBosses = ceresBosses
+    state.crateriaBosses = crateriaBosses
+    state.brinstarBosses = brinstarBosses
+    state.norfairBosses = norfairBosses
+    state.wreckedShipBosses = wreckedShipBosses
+    state.maridiaBosses = maridiaBosses
+    state.tourianBosses = tourianBosses
+    state.shipAI = shipAI
+    state.gameState = gameState
+    state.tunnelBreak = tunnelBreak
+    state.motherBrainHP = motherBrainHP
+    state.unlockedEquipment1 = unlockedEquipment1
+    state.unlockedEquipment2 = unlockedEquipment2
+    state.unlockedBeams = unlockedBeams
+    state.unlockedCharge = unlockedCharge
+    state.crateriaItems = crateriaItems
+    state.brinteriaItems = brinteriaItems
+    state.brinstarItems2 = brinstarItems2
+    state.brinstarItems3 = brinstarItems3
+    state.brinstarItems4 = brinstarItems4
+    state.brinstarItems5 = brinstarItems5
+    state.norfairItems1 = norfairItems1
+    state.norfairItems2 = norfairItems2
+    state.norfairItems3 = norfairItems3
+    state.norfairItems4 = norfairItems4
+    state.norfairItems5 = norfairItems5
+    state.wreckedShipItems = wreckedShipItems
+    state.maridiaItems1 = maridiaItems1
+    state.maridiaItems2 = maridiaItems2
+    state.maridiaItems3 = maridiaItems3
 end

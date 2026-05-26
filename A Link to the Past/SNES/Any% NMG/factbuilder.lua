@@ -40,22 +40,15 @@ addrs = {
 state = {
     started = false,
     escape = false,
-    ep = false,
-    dp = false,
-    toh = false,
-    castleTower = false,
-    agaDead = false,
-    pod = false,
-    sp = false,
-    sw = false,
-    tt = false,
-    ip = false,
-    mm = false,
-    tr = false,
+    completeDungeons = 0,
+    masterSword = false,
+    aga1Dead = false,
+    aga2Dead = false,
     ganon_dead = false
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -74,6 +67,7 @@ function checkStage()
         and gamemode == addrs.transition
         and gamemode_last == addrs.inDungeon then
             split()
+            state.escape = true
             return
         end
         --pendant/crystal collected
@@ -100,6 +94,7 @@ function checkStage()
             or mapID == addrs.mire
             or mapID == addrs.turtleRock then
                 split()
+                state.completeDungeons = state.completeDungeons + 1
                 return
             end
         end
@@ -117,6 +112,7 @@ function checkStage()
         and gamemode == addrs.triforceRoom
         and gamemode_last == addrs.inDungeon then
             split()
+            state.ganon_dead = true
             state.started = false
             return
         end
@@ -126,6 +122,7 @@ function checkStage()
     and linkState == addrs.masterGet
     and linkState_last ~= addrs.masterGet then
         split()
+            state.masterSword = true
         return
     end
     if world == addrs.darkWorld
@@ -136,12 +133,14 @@ function checkStage()
         if linkState == addrs.swordUP
         and linkState_last ~= addrs.swordUP then
             split()
+            state.aga1Dead = true
             return
         end
         -- Agh 2 beaten
         if linkState == addrs.default
         and linkState_last == addrs.flying then
             split()
+            state.aga2Dead = true
             return
         end
     end
@@ -161,6 +160,16 @@ function checkReset()
     and fileLoaded_last == addrs.running then
         reset()
         state.started = false
+        state.escape = false,
+        state.completeDungeons = 0,
+        state.masterSword = false,
+        state.collectionComplete = false,
+        state.aga1Dead = false,
+        state.aga2Dead = false,
+        state.ganon_dead = false
         return
     end
+end
+
+function updateState()
 end

@@ -42,6 +42,7 @@ state = {
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -142,4 +143,17 @@ function checkReset()
         state.started = false
         return
     end
+end
+
+function updateState()
+    state.level = level
+    state.world = world
+    state.player1input = player1input
+    state.player2input = player2input
+    state.BossHP = BossHP
+    state.exitCount = exitCount
+    state.levelComplete = levelComplete
+    state.scoreScreen = scoreScreen
+    state.shopPlayerID = shopPlayerID
+    state.shopScreen = shopScreen
 end

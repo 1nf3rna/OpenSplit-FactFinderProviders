@@ -45,6 +45,7 @@ state = {
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -55,19 +56,6 @@ function onTick()
 end
 
 function checkStage()
-    state.stage = stage
-    state.substage = substage
-    state.crates = crates
-    state.game_state = game_state
-    state.play_state = play_state
-    state.scene = scene
-    state.scene2 = scene2
-    state.gameplay = gameplay
-    state.BossHP = BossHP
-    state.W2P1HP = W2P1HP
-    state.FBossHP = FBossHP
-
-
     if game_state_last == addrs.ToolScene
     and game_state == addrs.InStage
     and gameplay == addrs.Active then
@@ -110,18 +98,6 @@ end
 
 
 function checkStart()
-    state.stage = stage
-    state.substage = substage
-    state.crates = crates
-    state.game_state = game_state
-    state.play_state = play_state
-    state.scene = scene
-    state.scene2 = scene2
-    state.gameplay = gameplay
-    state.BossHP = BossHP
-    state.W2P1HP = W2P1HP
-    state.FBossHP = FBossHP
-
     if game_state_last == addrs.Opening1
     or game_state_last == addrs.Opening2 then
         if game_state == 0x0
@@ -136,18 +112,6 @@ function checkStart()
 end
 
 function checkReset()
-    state.stage = stage
-    state.substage = substage
-    state.crates = crates
-    state.game_state = game_state
-    state.play_state = play_state
-    state.scene = scene
-    state.scene2 = scene2
-    state.gameplay = gameplay
-    state.BossHP = BossHP
-    state.W2P1HP = W2P1HP
-    state.FBossHP = FBossHP
-
     if game_state_last == addrs.Opening2
     and game_state == 0x0
     and gameplay_last == addrs.InActive
@@ -178,4 +142,18 @@ function checkReset()
         state.started = false
         return
     end
+end
+
+function updateState()
+    state.stage = stage
+    state.substage = substage
+    state.crates = crates
+    state.game_state = game_state
+    state.play_state = play_state
+    state.scene = scene
+    state.scene2 = scene2
+    state.gameplay = gameplay
+    state.BossHP = BossHP
+    state.W2P1HP = W2P1HP
+    state.FBossHP = FBossHP
 end

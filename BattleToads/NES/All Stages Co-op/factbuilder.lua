@@ -24,6 +24,7 @@ state = {
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -34,7 +35,6 @@ function onTick()
 end
 
 function checkStage()
-    state.currentLevel = level
     if level == addrs.QueenRoom
     and qdead == addrs.QueenDead
     and qdead_last == addrs.QueenAlive then
@@ -62,7 +62,6 @@ function checkStage()
 end
 
 function checkStart()
-    state.currentLevel = level
     if level == addrs.RagnaroksCanyon
     and level_last == addrs.start
     and player2 > 0 then
@@ -72,11 +71,14 @@ function checkStart()
 end
 
 function checkReset()
-    state.currentLevel = level
     if level == addrs.start
     and level_last ~= addrs.start then
         reset()
         state.started = false
         return
     end
+end
+
+function updateState()
+    state.currentLevel = level
 end
