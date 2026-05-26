@@ -1,0 +1,13 @@
+Name: "Zombie Hunter"
+Platform: "NES"
+ReadInterval: 8
+Watches:
+  - name: "stage"
+    address: "0x4A"
+    type: "U8"
+    bank: "ram"
+
+  - name: "mode"
+    address: "0xE"
+    type: "U8"
+    bank: "ram"
