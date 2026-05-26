@@ -18,9 +18,11 @@ addrs = {
 state = {
     started = false,
     level = 0x0,
+    mode = 0x0,
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -82,4 +84,9 @@ function checkReset()
         state.started = false
         return
     end
+end
+
+function updateState()
+    state.level = level
+    state.mode = mode
 end
