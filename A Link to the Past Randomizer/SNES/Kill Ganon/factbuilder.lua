@@ -2,58 +2,52 @@ addrs = {
     selectFile = 0x01,
     loadFile = 0x05,
     inDungeon = 0x7,
-    transition = 0xF, --room to overworld 
-    dungeon = 0xA,
-    lightWorld = 0x1,
-    darkWorld = 0xB,
-    swordUP = 0x24,
-    masterGet = 0x17,
-    sanctuary = 0x0,
-    eastern = 0x04,
-    desert = 0x06,
-    tower = 0x08,
-    swamp = 0x0a,
-    PoD = 0x0c,
-    mire = 0x0e,
-    skullWoods = 0x10,
-    ice = 0x12,
-    hera = 0x14,
-    thieves = 0x16,
-    turtleRock = 0x18,
-    GT = 0x1a,
-    overworld = 0xFF,
-    pyramid = 0x20,
-    pyramidOpen = 0xD,
-    bossMusic = 0x15,
-    fadeOut = 0x93,
+    triforceRoom = 0x19,
+    -- transition = 0xF, --room to overworld 
+    -- dungeon = 0xA,
+    -- lightWorld = 0x1,
+    -- darkWorld = 0xB,
+    -- swordUP = 0x24,
+    -- masterGet = 0x17,
+    -- sanctuary = 0x0,
+    -- eastern = 0x04,
+    -- desert = 0x06,
+    -- tower = 0x08,
+    -- swamp = 0x0a,
+    -- PoD = 0x0c,
+    -- mire = 0x0e,
+    -- skullWoods = 0x10,
+    -- ice = 0x12,
+    -- hera = 0x14,
+    -- thieves = 0x16,
+    -- turtleRock = 0x18,
+    -- GT = 0x1a,
+    -- outcast = 0x58,
+    -- overworld = 0xFF,
+    -- pyramid = 0x20,
+    -- pyramidOpen = 0xD,
+    -- bossMusic = 0x15,
+    -- fadeOut = 0x93,
+    -- digGame = 0x68,
+    -- preDigGame = 0x69,
+    -- purpChest = 0x3A,
     ganonRoom = 0x0,
-    sancDoor = 0x12,
-    door = 0x3E2,
-    hole = 0x65C,
-    default = 0x0,
-    flying = 0x1D,
-    running = 0xFFFF,
+    -- sancDoor = 0x12,
+    -- door = 0x3E2,
+    -- hole = 0x65C,
+    -- default = 0x0,
+    -- flying = 0x1D,
+    -- running = 0xFFFF,
+    -- iceRodCave = 0x120,
+    -- iceRod = 0x1,
 }
 
 state = {
     started = false,
-    escape = false,
-    ep = false,
-    dp = false,
-    toh = false,
-    castleTower = false,
-    agaDead = false,
-    pod = false,
-    sp = false,
-    sw = false,
-    tt = false,
-    ip = false,
-    mm = false,
-    tr = false,
-    ganon_dead = false
 }
 
 function onTick()
+    updateState()
     if not state.started then
         checkStart()
     end
@@ -65,7 +59,10 @@ end
 
 function checkStage()
     if maptile == addrs.ganonRoom
-    and triforce == addrs.fadeOut then
+    and gamemode == addrs.triforceRoom
+    and gamemode_last == addrs.inDungeon then
+    -- if maptile == addrs.ganonRoom
+    -- and triforce == addrs.fadeOut then
         split()
         state.started = false
         return
@@ -91,3 +88,6 @@ end
 --         return
 --     end
 -- end
+
+function updateState()
+end
