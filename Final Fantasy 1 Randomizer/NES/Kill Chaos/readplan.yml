@@ -1,0 +1,28 @@
+Name: "FF1R"
+Platform: "NES"
+ReadInterval: 8
+Watches:
+  - name: "playerInput"
+    address: "0x20"
+    type: "U8"
+    bank: "ram"
+
+  - name: "mapID"
+    address: "0x48"
+    type: "U8"
+    bank: "ram"
+
+  - name: "battleStatus"
+    address: "0x81"
+    type: "U8"
+    bank: "ram"
+
+  - name: "enemyGroup"
+    address: "0x7B"
+    type: "U8"
+    bank: "ram"
+
+  - name: "battleMusic"
+    address: "0xBA7"
+    type: "U8"
+    bank: "wram"
