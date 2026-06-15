@@ -48,7 +48,7 @@ addrs = {
 }
 
 state = {
-    started = false
+    started = false,
     roomID = 0x0,
     ceresBosses = 0x0,
     crateriaBosses = 0x0,
