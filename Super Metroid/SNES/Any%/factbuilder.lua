@@ -1,5 +1,6 @@
 addrs = {
     OptionsMenu = 0x2,
+    PostCutscene = 0x1F,
     ceresRidley == 0xE0B5,
     flatRoom == 0xE06B,
     morphBall == 0x9E9F,
@@ -345,19 +346,23 @@ function checkStage()
 end
 
 function checkStart()
-    -- normal start 17 frames late
-    -- if gameState == 0x1F
-    -- and gameState_last == 0x2 then
-    --     split()
-    --     state.started = true
-    -- end
-    if gameState == addrs.OptionsMenu
-    and option_menu == 0x0
-    and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
-    or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
+    -- normal start 17 frames late add a 283 ms offset
+    -- 125510 0x02
+    -- 125526 0x1F   17
+    -- 125720 0x07   194   211
+    if gameState == addrs.PostCutscene
+    and gameState_last == addrs.OptionsMenu then
         split()
         state.started = true
     end
+    -- if gameState_last == addrs.OptionsMenu
+    -- and gameState == 0x1E
+    -- and option_menu == 0x0 then
+    -- and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
+    -- or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
+        -- split()
+        -- state.started = true
+    -- end
     -- -- cutscene ended start
     -- if gameState == 0x1F
     -- and gameState_last == 0x1E then
