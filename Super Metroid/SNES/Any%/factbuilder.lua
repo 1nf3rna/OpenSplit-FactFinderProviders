@@ -153,8 +153,8 @@ function checkStage()
     end
     -- Charge Beam Aquired
     if roomID == addrs.bigPink
-    and (unlockedCharge_last and addrs.charge ) == 0
-    and (unlockedCharge and addrs.charge) > 0 then
+    and (unlockedCharge_last & addrs.charge ) == 0
+    and (unlockedCharge & addrs.charge) > 0 then
         split()
         return
     end
