@@ -67,7 +67,7 @@ Watches:
     type: "U16"
     bank: "wram"
 
-  - name: "ShipAI"
+  - name: "shipAI"
     address: "0xFB2"
     type: "U16"
     bank: "wram"
