@@ -22,7 +22,6 @@ addrs = {
     phantoon = 0xCD13,
     wreckedShipLeftSuperRoom = 0xCDA8,
     gravity = 0xCE40,
-    charge = 0x10,
     tourianHopper = 0xDC19,
     seaweedVert = 0xDCFF,
     bigBoy = 0xDCB1,
@@ -153,8 +152,7 @@ function checkStage()
     end
     -- Charge Beam Aquired
     if roomID == addrs.bigPink
-    and (unlockedCharge_last & addrs.charge ) == 0
-    and (unlockedCharge & addrs.charge) > 0 then
+    and unlockedCharge > unlockedCharge_last then
         split()
         return
     end
