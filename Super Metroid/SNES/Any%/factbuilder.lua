@@ -97,248 +97,249 @@ end
 function checkStage()
     -- Ceres Ridley
     if roomID == addrs.ceresRidley
-    and ceresBosses > ceresBosses_last then
+        and ceresBosses > ceresBosses_last then
         split()
         return
     end
     -- Escaped Ceres Station
     if roomID == addrs.ceresElevator
-    and gameState == addrs.startOfCeresCutscene
-    and gameState_last == addrs.normalGameplay then
+        and gameState == addrs.startOfCeresCutscene
+        and gameState_last == addrs.normalGameplay then
         split()
         return
     end
     -- Morph Aquired
     if roomID == addrs.morphBall
-    and unlockedEquipment2 > unlockedEquipment2_last then
+        and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
     -- First Missile
     if maxMissiles == 0x5
-    and maxMissiles_last == 0x0 then
+        and maxMissiles_last == 0x0 then
         split()
         return
     end
     -- Bombs Aquired
     if roomID == addrs.bombTorizo
-    and unlockedEquipment1 > unlockedEquipment1_last then
+        and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Bomb Torizo
     if roomID == addrs.bombTorizo
-    and crateriaBosses > crateriaBosses_last then
+        and crateriaBosses > crateriaBosses_last then
         split()
         return
     end
     -- Terminator Tank
     if roomID == addrs.terminator
-    and brinteriaItems == (brinteriaItems_last + 1) then
+        and brinteriaItems == (brinteriaItems_last + 1) then
         split()
         return
     end
     -- Early Supers
     if roomID == addrs.earlySupers
-    and brinstarItems2 == (brinstarItems2_last + 1) then
+        and brinstarItems2 == (brinstarItems2_last + 1) then
         split()
         return
     end
     -- Charge Missile
     if roomID == addrs.bigPink
-    and brinstarItems2 == (brinstarItems2_last + 64) then
+        and brinstarItems2 == (brinstarItems2_last + 64) then
         split()
         return
     end
     -- Charge Beam Aquired
     if roomID == addrs.bigPink
-    and unlockedCharge > unlockedCharge_last then
+        and unlockedCharge > unlockedCharge_last then
         split()
         return
     end
     -- Kraid
     if roomID == addrs.kraid
-    and brinstarBosses > brinstarBosses_last then
+        and brinstarBosses > brinstarBosses_last then
         split()
         return
     end
     -- Varia Suit Aquired
     if roomID == addrs.varia
-    and unlockedEquipment2 > unlockedEquipment2_last then
+        and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
     -- High Jump Boots Tank
     if roomID == addrs.hiJumpShaft
-    and norfairItems2 == (norfairItems2_last + 1) then
+        and norfairItems2 == (norfairItems2_last + 1) then
         split()
         return
     end
     -- High Jump Boots
     if roomID == addrs.hiJump
-    and unlockedEquipment1 > unlockedEquipment1_last then
+        and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Speed Booster Aquired
     if roomID == addrs.speedBooster
-    and unlockedEquipment1 > unlockedEquipment1_last then
+        and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Wave Missile
     if roomID == addrs.doubleChamber
-    and norfairItems3 == (norfairItems3_last + 8) then
+        and norfairItems3 == (norfairItems3_last + 8) then
         split()
         return
     end
     -- Wave Beam Aquired
     if roomID == addrs.waveBeam
-    and unlockedBeams > unlockedBeams_last then
+        and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
     -- Alpha Power Bombs Aquired
     if maxPowerBombs == 0x5
-    and maxPowerBombs_last == 0x0 then
+        and maxPowerBombs_last == 0x0 then
         split()
         return
     end
     -- Phantoon
     if roomID == addrs.phantoon
-    and wreckedShipBosses > wreckedShipBosses_last then
+        and wreckedShipBosses > wreckedShipBosses_last then
         split()
         return
     end
     -- Left Supers
     if roomID == addrs.wreckedShipLeftSuperRoom
-    and wreckedShipItems == (wreckedShipItems_last + 32) then
+        and wreckedShipItems == (wreckedShipItems_last + 32) then
         split()
         return
     end
     -- Gravity Suit Aquired
     if roomID == addrs.gravity
-    and unlockedEquipment2 > unlockedEquipment2_last then
+        and unlockedEquipment2 > unlockedEquipment2_last then
         split()
         return
     end
     -- Tunnel Broken
     if roomID == addrs.glassTunnel
-    and tunnelBreak == 0xD5
-    and tunnelBreak_last == 0x0 then
+        and tunnelBreak == 0xD5
+        and tunnelBreak_last == 0x0 then
         split()
         return
     end
     -- Botwoon
     if roomID == addrs.botwoon
-    and maridiaBosses > maridiaBosses_last then
+        and maridiaBosses > maridiaBosses_last then
         split()
         return
     end
     -- Botwoon Tank
     if roomID == addrs.botwoonETankRoom
-    and maridiaItems3 == (maridiaItems3_last + 1) then
+        and maridiaItems3 == (maridiaItems3_last + 1) then
         split()
         return
     end
     -- Draygon
     if roomID == addrs.draygon
-    and maridiaBosses > maridiaBosses_last then
+        and maridiaBosses > maridiaBosses_last then
         split()
         return
     end
     -- Space Jump Aquired
     if roomID == addrs.spaceJump
-    and unlockedEquipment1 > unlockedEquipment1_last then
+        and unlockedEquipment1 > unlockedEquipment1_last then
         split()
         return
     end
     -- Plasma Aquired
     if roomID == addrs.plasmaBeam
-    and unlockedBeams > unlockedBeams_last then
+        and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
     -- Ice Beam Aquired
     if roomID == addrs.iceBeam
-    and unlockedBeams > unlockedBeams_last then
+        and unlockedBeams > unlockedBeams_last then
         split()
         return
     end
     -- Entering Lower Norfair
     if roomID == addrs.mainHall
-    and roomID_last == addrs.lowerNorfairElevator then
+        and roomID_last == addrs.lowerNorfairElevator then
         split()
         return
     end
     -- Ridley Dead/Room
     if roomID == addrs.ridley
-    and norfairBosses > norfairBosses_last then
+        and norfairBosses > norfairBosses_last then
         split()
         return
     end
     -- Golden 4
     if roomID == addrs.statues
-    and roomID_last == addrs.statuesHallway then
+        and roomID_last == addrs.statuesHallway then
         split()
         return
     end
     -- metroid 1
     if roomID == addrs.metroidTwo
-    and roomID_last == addrs.metroidOne then
+        and roomID_last == addrs.metroidOne then
         split()
         return
     end
     -- metroid 2
     if roomID == addrs.metroidThree
-    and roomID_last == addrs.metroidTwo then
+        and roomID_last == addrs.metroidTwo then
         split()
         return
     end
     -- metroid 3
     if roomID == addrs.metroidFour
-    and roomID_last == addrs.metroidThree then
+        and roomID_last == addrs.metroidThree then
         split()
         return
     end
     -- metroid 4
     if roomID == addrs.tourianHopper
-    and roomID_last == addrs.metroidFour then
+        and roomID_last == addrs.metroidFour then
         split()
         return
     end
     -- baby
     if roomID == addrs.seaweedVert
-    and roomID_last == addrs.bigBoy then
+        and roomID_last == addrs.bigBoy then
         split()
         return
     end
     -- Mother Brain 1
     if roomID == addrs.motherBrain
-    and gameState == addrs.normalGameplay
-    and motherBrainHP == addrs.motherBrainHPP2
-    and motherBrainHP_last == 0 then
+        and gameState == addrs.normalGameplay
+        and motherBrainHP == addrs.motherBrainHPP2
+        and motherBrainHP_last == 0 then
         split()
         return
     end
     -- Mother Brain 2
     if roomID == addrs.motherBrain
-    and gameState == addrs.normalGameplay
-    and motherBrainHP == addrs.motherBrainHPP3
-    and motherBrainHP_last == 0 then
+        and gameState == addrs.normalGameplay
+        and motherBrainHP == addrs.motherBrainHPP3
+        and motherBrainHP_last == 0 then
         split()
         return
     end
     -- Mother Brain 3
     if roomID == addrs.motherBrain
-    and tourianBosses > tourianBosses_last then
+        and tourianBosses > tourianBosses_last then
         split()
         return
     end
     -- Final Escape need to add 1 frame
     if roomID == addrs.landingSite
-    and shipAI == addrs.endShip
-    and shipAI_last ~= addrs.endShip then
+        and tourianBosses > 0
+        and shipAI == addrs.endShip
+        and shipAI_last ~= addrs.endShip then
         split()
         state.started = false
         return
@@ -351,7 +352,7 @@ function checkStart()
     -- 125526 0x1F   17
     -- 125720 0x07   194   211
     if gameState == addrs.PostCutscene
-    and gameState_last == addrs.OptionsMenu then
+        and gameState_last == addrs.OptionsMenu then
         split()
         state.started = true
     end
@@ -360,26 +361,26 @@ function checkStart()
     -- and option_menu == 0x0 then
     -- and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
     -- or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
-        -- split()
-        -- state.started = true
+    -- split()
+    -- state.started = true
     -- end
     -- -- cutscene ended start
     -- if gameState == 0x1F
     -- and gameState_last == 0x1E then
     --     split()
-        -- state.started = true
+    -- state.started = true
     -- end
     -- -- zebes start
     -- if gameState == 0x6
     -- and gameState_last == 0x5 then
     --     split()
-        -- state.started = true
+    -- state.started = true
     -- end
 end
 
 function checkReset()
     if roomID == 0x0
-    and roomID_last ~= 0 then
+        and roomID_last ~= 0 then
         reset()
         state.started = false
         return
