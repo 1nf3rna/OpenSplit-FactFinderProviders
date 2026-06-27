@@ -57,38 +57,38 @@ end
 
 function checkStage()
     if game_state_last == addrs.ToolScene
-    and game_state == addrs.InStage
-    and gameplay == addrs.Active then
+        and game_state == addrs.InStage
+        and gameplay == addrs.Active then
         if stage == addrs.DinoSafari
-        and substage == addrs.BossStage then
-            if BossHP == 0x0 then 
+            and substage == addrs.BossStage then
+            if BossHP == 0x0 then
                 split()
-            	return
+                return
             end
-    	end
+        end
 
         if stage == addrs.TempleOfTools
-        and substage == addrs.BossStage then
+            and substage == addrs.BossStage then
             if W2P1HP == 0x0 then
                 split()
-            	return
+                return
             end
         end
 
         if stage == addrs.MonsterTheater
-        and substage == addrs.BossStage then
-            if crates == 0x7 then 
+            and substage == addrs.BossStage then
+            if crates == 0x7 then
                 split()
-            	return
+                return
             end
         end
 
         if stage == addrs.LostOnMars
-        and substage == addrs.BossStage then
+            and substage == addrs.BossStage then
             if FBossHP == 0x0 then
                 split()
                 state.started = false
-            	return
+                return
             end
         end
 
@@ -96,15 +96,14 @@ function checkStage()
     end
 end
 
-
 function checkStart()
     if game_state_last == addrs.Opening1
-    or game_state_last == addrs.Opening2 then
+        or game_state_last == addrs.Opening2 then
         if game_state == 0x0
-        and stage == addrs.DinoSafari
-        and substage == addrs.Stage1
-        and gameplay == addrs.InActive
-        and play_state == addrs.Dead then
+            and stage == addrs.DinoSafari
+            and substage == addrs.Stage1
+            and gameplay == addrs.InActive
+            and play_state == addrs.Dead then
             split()
             state.started = true
         end
@@ -113,16 +112,16 @@ end
 
 function checkReset()
     if game_state_last == addrs.Opening2
-    and game_state == 0x0
-    and gameplay_last == addrs.InActive
-    and gameplay == 0x0 then
+        and game_state == 0x0
+        and gameplay_last == addrs.InActive
+        and gameplay == 0x0 then
         reset()
         state.started = false
         return
     end
 
     --[[
-    if gameplay_last == 17 
+    if gameplay_last == 17
         and gameplay == 0
         and scene_last == 4
         and scene == 0
@@ -134,10 +133,10 @@ function checkReset()
     --]]
 
     if gameplay_last == addrs.Active
-    and gameplay == 0x0
-    and crates == 0x0
-    and substage == addrs.Stage1
-    and stage == addrs.DinoSafari then
+        and gameplay == 0x0
+        and crates == 0x0
+        and substage == addrs.Stage1
+        and stage == addrs.DinoSafari then
         reset()
         state.started = false
         return

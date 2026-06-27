@@ -52,23 +52,22 @@ function checkStage()
     -- lich 2 dead, in ToFR
     -- solo large chaos dead
     if mapID == addrs.chaosFloor
-    and enemyGroup == addrs.chaosFight
-    and battleMusic == addrs.victoryMusic 
-    and battleMusic_last == addrs.inBattleMusic then
+        and enemyGroup == addrs.chaosFight
+        and battleMusic == addrs.victoryMusic
+        and battleMusic_last == addrs.inBattleMusic then
         state.started = false
     end
 end
-
 
 function checkStart()
     -- start timer
     -- 13 frames after pressing start or A overworld starts to load
     -- all characters named, in menu, start or a pressed
     if mapID == addrs.mainMenu
-    and battleStatus == addrs.outOfBattle
-    and battleStatus_last == addrs.noBattle
-    and (playerInput == (playerInput_last + 80) -- Start pressed
-    or playerInput == (playerInput_last + 10)) then -- A pressed
+        and battleStatus == addrs.outOfBattle
+        and battleStatus_last == addrs.noBattle
+        and (playerInput == (playerInput_last + 80) -- Start pressed
+            or playerInput == (playerInput_last + 10)) then -- A pressed
         state.started = true
     end
 end

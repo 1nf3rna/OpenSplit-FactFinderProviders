@@ -36,25 +36,25 @@ end
 
 function checkStage()
     if level == addrs.QueenRoom
-    and qdead == addrs.QueenDead
-    and qdead_last == addrs.QueenAlive then
+        and qdead == addrs.QueenDead
+        and qdead_last == addrs.QueenAlive then
         split()
         state.started = false
         return
     end
     if level_last == addrs.Cutscene
-    and (level == addrs.WookieHole
-    or level == addrs.TurboTunnel
-    or level == addrs.ArcticCaverns
-    or level == addrs.SurfCity
-    or level == addrs.KarnathsLair
-    or level == addrs.VolkmiresInferno
-    or level == addrs.IntruderExcluder
-    or level == addrs.TerraTubes
-    or level == addrs.RatRace
-    or level == addrs.ClingerWinger
-    or level == addrs.TheRevolution
-    or level == addrs.QueenRoom) then
+        and (level == addrs.WookieHole
+            or level == addrs.TurboTunnel
+            or level == addrs.ArcticCaverns
+            or level == addrs.SurfCity
+            or level == addrs.KarnathsLair
+            or level == addrs.VolkmiresInferno
+            or level == addrs.IntruderExcluder
+            or level == addrs.TerraTubes
+            or level == addrs.RatRace
+            or level == addrs.ClingerWinger
+            or level == addrs.TheRevolution
+            or level == addrs.QueenRoom) then
         split()
 
         return
@@ -63,7 +63,7 @@ end
 
 function checkStart()
     if level == addrs.RagnaroksCanyon
-    and level_last == addrs.start then
+        and level_last == addrs.start then
         split()
         state.started = true
     end
@@ -71,7 +71,7 @@ end
 
 function checkReset()
     if level == addrs.start
-    and level_last ~= addrs.start then
+        and level_last ~= addrs.start then
         reset()
         state.started = false
         return
