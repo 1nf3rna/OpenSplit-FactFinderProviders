@@ -22,7 +22,7 @@ addrs = {
 }
 
 state = {
-    started = false
+    started = false,
     roomID = 0x0,
     ceresBosses = 0x0,
     crateriaBosses = 0x0,
@@ -71,64 +71,63 @@ function checkStage()
     -- Room Only Checks
     -- Ceres Ridley, metroid 1, metroid 2, metroid 3, metroid 4, baby
     if (roomID == addrs.ceresRidley and roomID_last == addrs.flatRoom)
-    or (roomID == addrs.metroidTwo and roomID_last == addrs.metroidOne)
-    or (roomID == addrs.metroidThree and roomID_last == addrs.metroidTwo)
-    or (roomID == addrs.metroidFour and roomID_last == addrs.metroidThree)
-    or (roomID == addrs.tourianHopper and roomID_last == addrs.metroidFour)
-    or (roomID == addrs.seaweedVert and roomID_last == addrs.bigBoy) then
+        or (roomID == addrs.metroidTwo and roomID_last == addrs.metroidOne)
+        or (roomID == addrs.metroidThree and roomID_last == addrs.metroidTwo)
+        or (roomID == addrs.metroidFour and roomID_last == addrs.metroidThree)
+        or (roomID == addrs.tourianHopper and roomID_last == addrs.metroidFour)
+        or (roomID == addrs.seaweedVert and roomID_last == addrs.bigBoy) then
         split()
         return
     end
     -- Boss Kill Checks
     -- Ceres Ridley, Bomb Torizo, Kraid, crocomire, Phantoon, Botwoon, Draygon, goldenTorizo, Ridley, Mother Brain 3
     if (ceresBosses > ceresBosses_last)
-    or (crateriaBosses > crateriaBosses_last)
-    or (brinstarBosses > brinstarBosses_last)
-    or (norfairBosses > norfairBosses_last)
-    or (wreckedShipBosses > wreckedShipBosses_last)
-    or (maridiaBosses > maridiaBosses_last)
-    or (tourianBosses > tourianBosses_last) then
+        or (crateriaBosses > crateriaBosses_last)
+        or (brinstarBosses > brinstarBosses_last)
+        or (norfairBosses > norfairBosses_last)
+        or (wreckedShipBosses > wreckedShipBosses_last)
+        or (maridiaBosses > maridiaBosses_last)
+        or (tourianBosses > tourianBosses_last) then
         split()
         return
     end
     -- State Checks
     -- Escaped Ceres Station, tube broken, mother brain p1, mother brain p2, final escape
     if (roomID == addrs.ceresElevator and gameState == addrs.startOfCeresCutscene and gameState_last == addrs.normalGameplay)
-    or (roomID == addrs.glassTunnel and tunnelBreak == addrs.tunnelBreak and tunnelBreak_last == 0x0)
-    or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP2 and motherBrainHP_last == 0)
-    or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP3 and motherBrainHP_last == 0)
-    or (roomID == addrs.landingSite and shipAI == addrs.endShip and shipAI_last ~= addrs.endShip) then --need to add 1 frame
-    end
+        or (roomID == addrs.glassTunnel and tunnelBreak == addrs.tunnelBreak and tunnelBreak_last == 0x0)
+        or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP2 and motherBrainHP_last == 0)
+        or (roomID == addrs.motherBrain and gameState == addrs.normalGameplay and motherBrainHP == addrs.motherBrainHPP3 and motherBrainHP_last == 0)
+        or (roomID == addrs.landingSite and shipAI == addrs.endShip and shipAI_last ~= addrs.endShip and tourianBosses > 0) then --need to add 1 frame
         split()
         if shipAI == addrs.endShip
-        and shipAI_last ~= addrs.endShip then
+            and shipAI_last ~= addrs.endShip then
             state.started = false
         end
         return
     end
     -- Equipment Unlocks
     -- Morph, varia, gravity, bombs, hjb, speed booster, space jump, grapple, xray, springball, screw attack,
-    -- spazer, wave, plasma, ice, charge, 
+    -- spazer, wave, plasma, ice, charge,
     -- Supers, Missiles, Power Bombs, etanks, reserve
     if (unlockedEquipment1 > unlockedEquipment1_last)
-    or (unlockedEquipment2 > unlockedEquipment2_last)
-    or (unlockedBeams > unlockedBeams_last)
-    or (unlockedCharge > unlockedCharge_last)
-    or (crateriaItems > crateriaItems_last)
-    or (brinteriaItems > brinteriaItems_last)
-    or (brinstarItems2 > brinstarItems2_last)
-    or (brinstarItems3 > brinstarItems3_last)
-    or (brinstarItems4 > brinstarItems4_last)
-    or (brinstarItems5 > brinstarItems5_last)
-    or (norfairItems1 > norfairItems1_last)
-    or (norfairItems2 > norfairItems2_last)
-    or (norfairItems3 > norfairItems3_last)
-    or (norfairItems4 > norfairItems4_last)
-    or (norfairItems5 > norfairItems5_last)
-    or (wreckedShipItems > wreckedShipItems_last)
-    or (maridiaItems1 > maridiaItems1_last)
-    or (maridiaItems2 > maridiaItems2_last)
-    or (maridiaItems3 > maridiaItems3_last) then
+        or (unlockedEquipment2 > unlockedEquipment2_last)
+        or (unlockedBeams > unlockedBeams_last)
+        or (unlockedCharge > unlockedCharge_last)
+        or (crateriaItems > crateriaItems_last)
+        or (brinteriaItems > brinteriaItems_last)
+        or (brinstarItems2 > brinstarItems2_last)
+        or (brinstarItems3 > brinstarItems3_last)
+        or (brinstarItems4 > brinstarItems4_last)
+        or (brinstarItems5 > brinstarItems5_last)
+        or (norfairItems1 > norfairItems1_last)
+        or (norfairItems2 > norfairItems2_last)
+        or (norfairItems3 > norfairItems3_last)
+        or (norfairItems4 > norfairItems4_last)
+        or (norfairItems5 > norfairItems5_last)
+        or (wreckedShipItems > wreckedShipItems_last)
+        or (maridiaItems1 > maridiaItems1_last)
+        or (maridiaItems2 > maridiaItems2_last)
+        or (maridiaItems3 > maridiaItems3_last) then
         split()
         return
     end
@@ -914,9 +913,9 @@ function checkStart()
     --     state.started = true
     -- end
     if gameState == addrs.OptionsMenu
-    and option_menu == 0x0
-    and (player1input == (player1input_last + 128) --player1input bit7 set +128 dec
-    or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
+        and option_menu == 0x0
+        and (player1input == (player1input_last + 128)          --player1input bit7 set +128 dec
+            or player1input2 == (player1input2_last + 16)) then --player1input2 bit4 set +16 dec) then
         split()
         state.started = true
     end
@@ -924,19 +923,19 @@ function checkStart()
     -- if gameState == 0x1F
     -- and gameState_last == 0x1E then
     --     split()
-        -- state.started = true
+    -- state.started = true
     -- end
     -- -- zebes start
     -- if gameState == 0x6
     -- and gameState_last == 0x5 then
     --     split()
-        -- state.started = true
+    -- state.started = true
     -- end
 end
 
 function checkReset()
     if roomID == 0x0
-    and roomID_last ~= 0 then
+        and roomID_last ~= 0 then
         reset()
         state.started = false
         return
