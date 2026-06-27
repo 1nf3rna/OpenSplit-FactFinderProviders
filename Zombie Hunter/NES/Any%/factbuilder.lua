@@ -1,17 +1,17 @@
 addrs = {
-    Start = 00,
-    OldUnderpass = 01, -- Stage 2
-    TunnelofIce = 02, -- Stage 2
-    CorridorofDisorder = 03, -- Stage 3
-    PathoftheCrystal = 04, -- Stage 3
-    Ruins = 05, -- Stage 4 
-    UndergroundStream = 06, -- Stage 4
-    L_Graves = 07, -- Stage 5
-    R_Graves = 08, -- Stage 6
-    RoomofMagma = 09, -- Stage 7
-    ForkBoss = 0a, -- Forks/Boss rooms
-    Normal = 0x0, -- Game A
-    Hard = 0x1, -- Game B
+    Start = 0x0,
+    OldUnderpass = 0x1,       -- Stage 2
+    TunnelofIce = 0x2,        -- Stage 2
+    CorridorofDisorder = 0x3, -- Stage 3
+    PathoftheCrystal = 0x4,   -- Stage 3
+    Ruins = 0x5,              -- Stage 4
+    UndergroundStream = 0x6,  -- Stage 4
+    L_Graves = 0x7,           -- Stage 5
+    R_Graves = 0x8,           -- Stage 6
+    RoomofMagma = 0x9,        -- Stage 7
+    ForkBoss = 0xA,           -- Forks/Boss rooms
+    Normal = 0x0,             -- Game A
+    Hard = 0x1,               -- Game B
     NormalEnd = 0x4,
 }
 
@@ -34,17 +34,17 @@ end
 
 function checkStage()
     -- Stage 1
-    if stage == addrs.OldUnderpass || stage == addrs.TunnelofIce then
+    if stage == addrs.OldUnderpass or stage == addrs.TunnelofIce then
         split()
         return
     end
     -- Stage 2
-    if stage == addrs.CorridorofDisorder || stage == addrs.PathoftheCrystal then
+    if stage == addrs.CorridorofDisorder or stage == addrs.PathoftheCrystal then
         split()
         return
     end
     -- Stage 3
-    if stage == addrs.Ruins || stage == addrs.UndergroundStream then
+    if stage == addrs.Ruins or stage == addrs.UndergroundStream then
         split()
         return
     end
@@ -59,7 +59,7 @@ function checkStage()
         return
     end
     -- Stage 6
-    if stage ==addrs.RoomofMagma then
+    if stage == addrs.RoomofMagma then
         split()
         return
     end
@@ -69,7 +69,6 @@ function checkStage()
         return
     end
 end
-
 
 function checkStart()
     if stage == Start then
