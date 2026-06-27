@@ -3,7 +3,7 @@ addrs = {
     loadFile = 0x05,
     inDungeon = 0x7,
     triforceRoom = 0x19,
-    transition = 0xF, --room to overworld 
+    transition = 0xF, --room to overworld
     dungeon = 0xA,
     lightWorld = 0x1,
     darkWorld = 0xB,
@@ -54,7 +54,6 @@ state = {
 }
 
 function onTick()
-    updateState()
     if not state.started then
         checkStart()
     end
@@ -67,37 +66,37 @@ end
 function checkStage()
     if world == addrs.dungeon then
         -- Escaped
-        if mapID >= addrs.sanctuary
-        and yPos == addrs.door
-        and maptile == addrs.sancDoor
-        and gamemode == addrs.transition
-        and gamemode_last == addrs.inDungeon then
+        if mapID == addrs.sanctuary
+            and yPos == addrs.door
+            and maptile == addrs.sancDoor
+            and gamemode == addrs.transition
+            and gamemode_last == addrs.inDungeon then
             split()
             state.escape = true
             return
         end
         -- Ice Rod Get -- world ID might be wrong
         if maptile == addrs.iceRodCave
-        and iceRodFlag == addrs.iceRod
-        and gamemode == addrs.transition
-        and gamemode_last == addrs.inDungeon then
+            and iceRodFlag == addrs.iceRod
+            and gamemode == addrs.transition
+            and gamemode_last == addrs.inDungeon then
             split()
             state.collectionComplete = true
             return
         end
         -- VoO Chest Game
         if mapID == addrs.overworld
-        and roomFlags == (roomFlags_last + 64)
-        and areaIndex == addrs.outcast
-        and gamemode == addrs.transition
-        and gamemode_last == addrs.inDungeon
+            and roomFlags == (roomFlags_last + 64)
+            and areaIndex == addrs.outcast
+            and gamemode == addrs.transition
+            and gamemode_last == addrs.inDungeon
         then
             split()
             return
         end
         --pendant/crystal collected
         if linkState == addrs.swordUP
-        and linkState_last ~= addrs.swordUP then
+            and linkState_last ~= addrs.swordUP then
             -- Eastern Palace
             -- Desert Palace
             -- Tower of Hera
@@ -109,15 +108,15 @@ function checkStage()
             -- Misery Mire
             -- Turtle Rock
             if mapID == addrs.eastern
-            or mapID == addrs.desert
-            or mapID == addrs.hera
-            or mapID == addrs.PoD
-            or mapID == addrs.thieves
-            or mapID == addrs.skullWoods
-            or mapID == addrs.ice
-            or mapID == addrs.swamp
-            or mapID == addrs.mire
-            or mapID == addrs.turtleRock then
+                or mapID == addrs.desert
+                or mapID == addrs.hera
+                or mapID == addrs.PoD
+                or mapID == addrs.thieves
+                or mapID == addrs.skullWoods
+                or mapID == addrs.ice
+                or mapID == addrs.swamp
+                or mapID == addrs.mire
+                or mapID == addrs.turtleRock then
                 split()
                 state.completeDungeons = state.completeDungeons + 1
                 return
@@ -126,53 +125,52 @@ function checkStage()
         -- Castle Conquered entering Agh 1
         -- Ganon's Tower entering Agh 2
         if (mapID == addrs.tower
-        or mapID == addrs.GT)
-        and music == addrs.bossMusic
-        and music_last ~= addrs.bossMusic then
+                or mapID == addrs.GT)
+            and music == addrs.bossMusic
+            and music_last ~= addrs.bossMusic then
             split()
             return
         end
         -- finish
         if maptile == addrs.ganonRoom
-        and gamemode == addrs.triforceRoom
-        and gamemode_last == addrs.inDungeon then
+            and gamemode == addrs.triforceRoom
+            and gamemode_last == addrs.inDungeon then
             split()
             state.ganon_dead = true
             state.started = false
             return
         end
     end
-    if  world == addrs.lightWorld then
+    if world == addrs.lightWorld then
         -- Master Sword
         if linkState == addrs.masterGet
-        and linkState_last ~= addrs.masterGet then
+            and linkState_last ~= addrs.masterGet then
             split()
             state.masterSword = true
             return
         end
-
     end
     if world == addrs.darkWorld
-    and mapID == addrs.overworld then
+        and mapID == addrs.overworld then
         -- dig game done
         if triforce == addrs.preDigGame
-        and triforce_last == addrs.digGame then
+            and triforce_last == addrs.digGame then
             split()
             return
         end
         -- Agh 1 beaten on pyramid
         if maptile == addrs.pyramid
-        and linkState == addrs.swordUP
-        and linkState_last ~= addrs.swordUP then
+            and linkState == addrs.swordUP
+            and linkState_last ~= addrs.swordUP then
             split()
             state.aga1Dead = true
             return
         end
         -- Agh 2 beaten
         if maptile == addrs.pyramidOpen
-        and yPos == addrs.hole
-        and linkState == addrs.default
-        and linkState_last == addrs.flying then
+            and yPos == addrs.hole
+            and linkState == addrs.default
+            and linkState_last == addrs.flying then
             split()
             state.aga2Dead = true
             return
@@ -182,9 +180,9 @@ end
 
 function checkStart()
     if gamemode == addrs.loadFile
-    and gamemode_last == addrs.selectFile then
-    -- and ((0xD0 & player1input) ~= 0
-    -- or (0xC0 & player1inputcont) ~= 0) then
+        and gamemode_last == addrs.selectFile then
+        -- and ((0xD0 & player1input) ~= 0
+        -- or (0xC0 & player1inputcont) ~= 0) then
         split()
         state.started = true
         return
@@ -193,7 +191,7 @@ end
 
 function checkReset()
     if fileloaded ~= addrs.running
-    and fileloaded_last == addrs.running then
+        and fileloaded_last == addrs.running then
         reset()
         state.started = false
         state.escape = false
@@ -205,7 +203,4 @@ function checkReset()
         state.ganon_dead = false
         return
     end
-end
-
-function updateState()
 end
